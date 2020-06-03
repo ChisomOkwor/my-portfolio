@@ -1,9 +1,170 @@
+/* Main Content */
 #content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+  margin-left: 21%;
+  margin-right: 5%;
 }
 
-#greeting-container {
-  margin-top: 20px;
+/* The sidebar menu */
+.sidenav {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 17%; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: #585c6e; 
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: whitesmoke;
+  display: block;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #0616f5;
+}
+
+/* Style page content */
+.main {
+  margin-left: 160px; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+/* Side navigation bar menu */
+.menu{
+   text-align:center;
+   font-size: 6px;
+   background-color: #30343f;
+}
+
+/* Self Introduction */
+.nameintro {
+    margin-top: 18%;
+    margin-bottom: 18%;
+    padding-top: 18px;
+ 	padding-left: 30px; 
+    padding-bottom: 18px;
+    background-color: rgb(153, 151, 190);
+    
+}
+
+/* Top Background Image */
+#topImg {
+    margin-left: 16%;
+    width: 100%; 
+    z-index: 1;
+    margin-top: -10px;
+    height: 500px;
+    margin-bottom: 3%;
+    
+}
+
+/* Story about myself */
+#myStory{
+  border-radius: 25px;
+  background-color: #faf5fc;
+  padding: 25px;
+  width: 80%;
+  height:relative;
+
+}
+
+/* Flags indicting each section */
+.flag {
+margin-top: 0;
+display: inline-flex;
+padding: 10px;
+color: whitesmoke;
+}
+
+/* Horizontal line for flags */
+hr {
+margin-bottom: 0;
+}
+
+/* Profile Photo */
+.profilePhoto {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+  height: 55%;
+}
+
+/* Style for contact form */
+.contact-form{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin: auto;
+    width: 85%;
+    background:#f1f1f1;
+    max-width: 600px;
+    top: 50%;
+    left: 50%;
+    border-radius: 8px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 30px 40px;
+    /* font-family: "Montserrat", sans-serif; */
+
+}
+
+/* Header on Contact Form */
+.contact-form h1{
+    margin-top: 0;
+    font-weight: 200;
+
+}
+
+/* Style for text boxes. */
+.textb{
+    border: 1px solid gray;
+    padding: 12px 18px;
+    margin: 8px 0;
+    border-radius: 8px;
+}
+
+/* Text Box Label */
+.textb label{
+    display: block;
+    text-align: left;
+    color: #333;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* Text Box input and text area */
+.textb input,.textb textarea{
+    width: 100%;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 18px;
+    margin-top:6px;
+}
+
+/* Send button. */
+.btn{
+    display: block;
+    background: #1cd68f;
+    padding: 14px 0;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 8px;
+    width: 100%;
+
 }

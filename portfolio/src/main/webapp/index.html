@@ -6,13 +6,168 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
+  
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
+      <a name="home"> </a>
+      <div >
+	<!-- Side navigation -->
+	    <div class="sidenav">
+        <div class= "nameintro"> 
+        <h1 style="color:whitesmoke; font-family:Didot;" ><strong> CHISOM OKWOR </strong></h1>
+        <p style="color:whitesmoke; font-family:Didot;" > Welcome to my Portfolio Website </p>
+        </div>
+
+        <div class="menu">
+            <hr />
+  		<a href="#home"><font size="-1">HOME </font> </a>
+          <hr />
+  		<a href="#about"> <font size="-1">ABOUT</font> </a>
+          <hr />
+  		<a href="#portfolio"> <font size="-1">PORTFOLIO</font> </a>
+          <hr />
+        <a href="#resume"> <font size="-1">RESUME </font> </a>
+            <hr />
+  		<a href="#contact"> <font size="-1">CONTACT</font></a>
+          <hr />
+        </div>
+
+	</div>
+    <!--Side navigation end-->
+
+    <!-- Background Image at the top -->
+    <img id="topImg" src="images/background1.jpeg" >
+
+    <!-- main content -->
+    <div id="content" >
+        <!-- Intro greeting -->
+        <h1 style="text-align:center; margin-bottom: -1px; color: #5c57ad;"  > HELLO! </h1>
+        <p style="text-align:center; color: #8987ab;" > I'm a Computer Science undergrad passionate about building things that make people's lives better. </p>
+        <br>
+        <br>
+
+        <!-- About me Section -->
+        <a name="about"> </a>
+        <div class="tag">
+            <hr width="100%;" color="#f59042" size="5">
+            <h2 class="flag" style= "background-color:#ffae70;">  ABOUT </h2> 
+        </div>
+        <br>
+        <br>
+
+
+        <!-- Profile Photo -->
+        <div >
+            <img style="margin-bottom:20px; " class="profilePhoto" src="images/frothy.png" alt="avatar" class="profile-pic">
+        </div>
+
+        <!-- Image Caption -->
+        <h3 style="text-align:center;color:#f59042;"> I'm on <a href="https://github.com/ChisomOkwor/" style="color:#f59042; text-decoration:none;"> GitHub <a/> and <a href="https://www.linkedin.com/in/chisomthesteminist/" style="color:#f59042; text-decoration:none;"> Linkedin </a> </h3>
+        <p style="text-align:center; margin-top:-1px; color:#f59042;" > Check them out </p>
+
+        <!-- Personal story section -->
+        <div id="myStory"> 
+            <h2 style="color: #f59042;">FROM CLULESS TO PROGRAMMER <h2>
+            <p style="color: #8987ab"> 
+                Throughout my 6 years of Secondary School, I had no interest in Computer Science.
+                My knowledge of Technology began in my final year when 
+                I joined the CISCO Computer Club.
+                I can recall coding fun and interactive stories 
+                with my friends using <a href= "https://scratch.mit.edu/"  style="color: #716db3; text-decoration:none;"> SCRATCH </a> 
+                <br>
+
+                Months after joining the club, 
+                I was selected to attend a <a href="https://www.cisco.com/c/en_dz/training-events/events-webinars.html" style="color: #716db3; text-decoration:none;"> CISCO Networking Conference. <a/>
+                There, I was introduced to 3D printing, Computer Networks, 
+                and the tech world in general. 
+                I was inspired, but still clueless about a Career in Tech.
+                <br>
+
+                My love for programming was spurred by the 
+                <a href="https://buildyourfuture.withgoogle.com/programs/googleinresidence/" style="color: #716db3; text-decoration:none;"> Google in Residence Program <a/> (GIR) in my
+                <a href="https://www.fisk.edu/" style="color: #716db3; text-decoration:none;"> University. <a/> 
+                I took an introductory CS class with a GIR Instructor, and I became convinced
+                about my career path.
+                <br>
+                Technology inspires me everyday, and I always love the challenge!
+            </p>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+        
+
+        <!-- Portfolio Section -->
+        <a name="portfolio"> </a>
+        <div class="tag">
+        <hr width="100%;" color="#c7247e" size="5">
+        <h2 class="flag" style = "background-color:#e02f90" >PORTFOLIO</h2>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <!-- Embeded Resume Section-->
+        <a name="resume"> </a>
+        <div class="tag">
+            <hr width="100%;" color="#247bc7" size="5">
+            <h2 class="flag" style="background-color:#3091e6">RESUME</h2>
+        </div>
+
+        <br>
+        <br>
+        <embed src="images/My Resume.pdf" type="application/pdf" width="100%" height="500px"  style="margin-bottom: 20px;  margin-top: 20px;">
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <!-- Contact Me section -->
+        <a name="contact"> </a>
+        <div class="tag">
+            <hr width="100%;" color="#24c770" size="5">
+            <h2 class="flag" style="background-color:#1cd68f">CONTACT ME</h2>
+        </div>
+
+        <br>
+        <br>
+        <div class="contact-form">
+
+            <h2 style=" color:#30343f; "> Get In Touch! <h2/>
+            <div class="textb"> 
+                <label>  Full Name :  </label>
+                <input type="text" name="" value="" placeholder="Enter your Name">
+            </div>
+
+            <div class="textb"> 
+                <label> Email :  </label>
+                <input type="text" name="" value="" placeholder="Enter your Email">
+            </div>
+
+            <div class="textb"> 
+                <label>  Phone Number :  </label>
+                <input type="text" name="" value="" placeholder="Enter your phone number">
+            </div>
+
+            <div class="textb"> 
+                <label>  Message :  </label>
+                <textarea>  </textarea>
+            </div>
+
+            <a class="btn"> Send <a/>
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+    <!-- main content end -->
+
+
     </div>
-  </body>
-</html>
+  </body> 
+</html> 
+ 
