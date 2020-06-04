@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+    <element onload="myScript">
   <head>
     <meta charset="UTF-8">
     <title>My Portfolio</title>
@@ -38,7 +39,7 @@
     <img id="topImg" src="images/background1.jpeg" >
 
     <!-- main content -->
-    <div id="content" >
+    <div id="maincontent" >
         <!-- Intro greeting -->
         <h1 style="text-align:center; margin-bottom: -1px; color: #5c57ad;"  > HELLO! </h1>
         <p style="text-align:center; color: #8987ab;" > I'm a Computer Science undergrad passionate about building things that make people's lives better. </p>
@@ -66,25 +67,26 @@
 
         <!-- Personal story section -->
         <div id="myStory"> 
-            <h2 style="color: #f59042;">FROM CLULESS TO PROGRAMMER <h2>
+            <h2 style="color: #f59042;">FROM CLULESS TO PROGRAMMER </h2>
             <p style="color: #8987ab"> 
                 Throughout my 6 years of Secondary School, I had no interest in Computer Science.
                 My knowledge of Technology began in my final year when 
                 I joined the CISCO Computer Club.
                 I can recall coding fun and interactive stories 
-                with my friends using <a href= "https://scratch.mit.edu/"  style="color: #716db3; text-decoration:none;"> SCRATCH </a> 
+                with my friends using <a href= "https://scratch.mit.edu/"  style="color: #746fde; text-decoration:none;"> SCRATCH. </a> 
                 <br>
 
                 Months after joining the club, 
-                I was selected to attend a <a href="https://www.cisco.com/c/en_dz/training-events/events-webinars.html" style="color: #716db3; text-decoration:none;"> CISCO Networking Conference. <a/>
+                I was selected to attend a 
+                <a href="https://www.cisco.com/c/en_dz/training-events/events-webinars.html" style="color: #746fde; text-decoration:none;"> CISCO Networking Conference. <a/>
                 There, I was introduced to 3D printing, Computer Networks, 
                 and the tech world in general. 
                 I was inspired, but still clueless about a Career in Tech.
                 <br>
 
                 My love for programming was spurred by the 
-                <a href="https://buildyourfuture.withgoogle.com/programs/googleinresidence/" style="color: #716db3; text-decoration:none;"> Google in Residence Program <a/> (GIR) in my
-                <a href="https://www.fisk.edu/" style="color: #716db3; text-decoration:none;"> University. <a/> 
+                <a href="https://buildyourfuture.withgoogle.com/programs/googleinresidence/" style="color: #746fde; text-decoration:none;"> Google in Residence Program <a/> (GIR) in my
+                <a href="https://www.fisk.edu/" style="color: #746fde; text-decoration:none;"> University. <a/> 
                 I took an introductory CS class with a GIR Instructor, and I became convinced
                 about my career path.
                 <br>
@@ -105,6 +107,85 @@
         <h2 class="flag" style = "background-color:#e02f90" >PORTFOLIO</h2>
         </div>
 
+    <!-- Navigation Buttons for Portfolio -->
+    <div id="myBtnContainer">
+        <button id="all" class="btn" onclick="filterSelection('all')"> Show all</button>
+        <button class="btn" onclick="filterSelection('project')"> Projects</button>
+        <button class="btn" onclick="filterSelection('hacks')"> Hackathons</button>
+        <button class="btn" onclick="filterSelection('hobbies')"> Hobbies</button>
+    </div>
+
+    <!-- Portfolio Gallery Grid -->
+    <div class="row">
+        <div class="column project">
+            <div class="content">
+            <img src="images/proj1.jpg" alt="Proj1" style="width:100%">
+            <h4> <a href="https://smartrivia-jeopardy.firebaseapp.com/" style="color: #746fde; text-decoration:none;"> Smartrivia <a></h4>
+            <p>My first deployed application; Created using the Jeopardy API. Check it out!</p>
+            </div>
+        </div>
+        <div class="column project">
+            <div class="content">
+            <img src="images/proj2.jpeg" alt="Proj2" style="width:100%;">
+            <h4> <a href="https://github.com/ChisomOkwor/Campus-Connect" style="color: #746fde; text-decoration:none;">Campus Connect </a></h4>
+            <p>My first team project; Built to help students become more connected on campus.</p>
+            </div>
+        </div>
+        <div class="column project">
+            <div class="content">
+            <img src="images/proj3.jpeg" alt="Proj3" style="width:100%; ">
+            <h4> <a href="https://github.com/ChisomOkwor/thriftina" style="color: #746fde; text-decoration:none;">Thriftina </a></h4>
+            <p>My most recent project; Helpes people save money by comparing store prices</p>
+            </div>
+        </div>
+
+        <div class="column hacks">
+            <div class="content">
+            <img src="images/hack1.jpg" alt="Hacks" style="width:100%; ">
+            <h4>Google Nash Hack</h4>
+            <p>My first hackathon</p>
+            </div>
+        </div>
+        <div class="column hacks">
+            <div class="content">
+            <img src="images/hack2.jpg" alt="Hacks1" style="width:100%;">
+
+            <h4>Capital One SSE</h4>
+            <p>My most recent Hackthon</p>
+            </div>
+        </div>
+        <div class="column hacks">
+            <div class="content">
+            <img src="images/hack3.jpg" alt="Hacks2" style="width:100%;">
+            <h4>Dell Innovation lab</h4>
+            <p>A hackthon my team came First Place</p>
+            </div>
+        </div>
+        <div class="column hobbies">
+            <div class="content">
+            <img src="images/hobby3.jpg" alt="Hobby1" style="width:100%; ">
+            <h4>Food and Movies</h4>
+            <p>I really enjoy spending time in a chilly space, watching shows, and eating spicy food.</p>
+            </div>
+        </div>
+        <div class="column hobbies">
+            <div class="content">
+            <img src="images/hobby4.jpg" alt="Hobby2" style="width:100%; ">
+            <h4>Drawing and Painting</h4>
+            <p>Recently realized I love doodling, painting, and drawing stuff. It is relaxing.</p>
+            </div>
+        </div>
+        <div class="column hobbies" id="anime">
+            <div class="content">
+            <img src="images/hobby1.jpeg" alt="Hobby3" style="width:100%; ">
+            <h4>Fashion Design</h4>
+            <p>Spent 3 months learning sewing at a Fashion School in Lagos. I make clothes for myself and others in my spare time.</p>
+            </div>
+        </div>
+<!-- END GRID -->
+    </div>
+        <!-- Portfolio end -->
+
         <br>
         <br>
         <br>
@@ -119,7 +200,7 @@
 
         <br>
         <br>
-        <embed src="images/My Resume.pdf" type="application/pdf" width="100%" height="500px"  style="margin-bottom: 20px;  margin-top: 20px;">
+        <embed src="images/resume.pdf" type="application/pdf" width="100%" height="500px"  style="margin-bottom: 20px;  margin-top: 20px;">
         <br>
         <br>
         <br>
@@ -157,7 +238,7 @@
                 <textarea>  </textarea>
             </div>
 
-            <a class="btn"> Send <a/>
+            <a class="sendbtn"> Send <a/>
 
         </div>
         <br>
