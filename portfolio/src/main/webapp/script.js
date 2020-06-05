@@ -12,70 +12,68 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
+// /**
+//  * Adds a random greeting to the page.
+//  */
 
+// function addRandomGreeting() {
+//   const greetings =
+//       ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
 
+//   // Pick a random greeting.
+//   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
 
-
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
+//   // Add it to the page.
+//   const greetingContainer = document.getElementById('greeting-container');
+//   greetingContainer.innerText = greeting;
+// }
 
 window.onload = function () {
     // document.getElementsById('all').checked=true;
-    filterSelection('all') // Execute the function and show all columns
+    showAllColumns('all') 
 }
 
 
-function filterSelection(c) {
-  var x, i;
-  x = document.getElementsByClassName("column");
-  if (c == "all") c = "";
+function showAllColumns(column) {
+  var arrayOfAllColumns, i;
+  arrayOfAllColumns = document.getElementsByClassName("column");
+  if (column == "all") column = "";
   // Add the "show" class (display:block) to the filtered elements, and remove the "show" class from the elements that are not selected
-  for (i = 0; i < x.length; i++) {
-    w3RemoveClass(x[i], "show");
-    if (x[i].className.indexOf(c) > -1) w3AddClass(x[i], "show");
+  n = arrayOfAllColumns.length;
+  for (i = 0; i < n; i++) {
+    w3RemoveClass(arrayOfAllColumns[i], "show");
+    if (arrayOfAllColumns[i].className.indexOf(column) > -1) w3AddClass(arrayOfAllColumns[i], "show");
   }
 }
 
 // Show filtered elements
 function w3AddClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    if (arr1.indexOf(arr2[i]) == -1) {
-      element.className += " " + arr2[i];
+  var i, arrOfFilteredColumns, showElementArray;
+  arrOfFilteredColumns = element.className.split(" ");
+  showElementArray = name.split(" ");
+  for (i = 0; i < showElementArray.length; i++) {
+    if (arrOfFilteredColumns.indexOf(showElementArray[i]) == -1) {
+      element.className += " " + showElementArray[i];
     }
   }
 }
 
 // Hide elements that are not selected
 function w3RemoveClass(element, name) {
-  var i, arr1, arr2;
-  arr1 = element.className.split(" ");
-  arr2 = name.split(" ");
-  for (i = 0; i < arr2.length; i++) {
-    while (arr1.indexOf(arr2[i]) > -1) {
-      arr1.splice(arr1.indexOf(arr2[i]), 1);
+  var i,  arrOfFilteredColumns , showElementArray;
+  arrOfFilteredColumns = element.className.split(" ");
+  showElementArray = name.split(" ");
+  for (i = 0; i < showElementArray.length; i++) {
+    while ( arrOfFilteredColumns.indexOf(showElementArray[i]) > -1) {
+       arrOfFilteredColumns .splice( arrOfFilteredColumns .indexOf(showElementArray[i]), 1);
     }
   }
-  element.className = arr1.join(" ");
+  element.className =  arrOfFilteredColumns.join(" ");
 }
 
 // Add active class to the current button (highlight it)
 var btnContainer = document.getElementById("myBtnContainer");
-var btns = btnContainer.getElementsByClassName("btn");
+var btns = document.getElementsByClassName("btn");
 for (var i = 0; i < btns.length; i++) {
   btns[i].addEventListener("click", function(){
     var current = document.getElementsByClassName("active");
