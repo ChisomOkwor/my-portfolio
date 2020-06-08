@@ -1,13 +1,16 @@
 /* Main Content */
-#content {
-  margin-left: 21%;
+#maincontent {
   margin-right: 5%;
+  margin-left: 24%;
+  position: relative;
+  left:0px;
 }
 
 /* The sidebar menu */
 .sidenav {
+  
   height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 17%; /* Set the width of the sidebar */
+  width: 20%; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 1; /* Stay on top */
   top: 0; /* Stay at the top */
@@ -77,7 +80,7 @@
   border-radius: 25px;
   background-color: #faf5fc;
   padding: 25px;
-  width: 80%;
+  width: 82%;
   height:relative;
 
 }
@@ -157,7 +160,7 @@ margin-bottom: 0;
 }
 
 /* Send button. */
-.btn{
+.sendbtn{
     display: block;
     background: #1cd68f;
     padding: 14px 0;
@@ -168,3 +171,77 @@ margin-bottom: 0;
     width: 100%;
 
 }
+
+/* portfolio */
+.content {
+  box-sizing: border-box;
+  margin: 10px;
+  position: relative;
+}
+
+/* Center website */
+.main {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.row {
+  margin: 8px -16px;
+}
+
+/* Add padding BETWEEN each column (if you want) */
+.row,
+.row > .column {
+  padding: 10px;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  display: none; /* Hide columns by default */
+}
+
+/* Clear floats after rows */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Content */
+.content {
+  background-color: rgb(226, 221, 226);
+  padding: 10px;
+  
+}
+
+/* The "show" class is added to the filtered elements */
+.show {
+  display: inline;
+}
+
+/* Style the buttons */
+.btn {
+  background-color: #c7247e; 
+  border: none;
+  color: whitesmoke;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Add a grey background color on mouse-over */
+.btn:hover {
+  background-color: #bb3780;
+}
+
+/* Add a dark background color to the active button */
+.btn.active {
+   background-color: #5c123a;
+   color: whitesmoke;
+}
+
