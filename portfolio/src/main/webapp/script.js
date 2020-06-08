@@ -12,27 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// /**
-//  * Adds a random greeting to the page.
-//  */
-
-// function addRandomGreeting() {
-//   const greetings =
-//       ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-//   // Pick a random greeting.
-//   const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-//   // Add it to the page.
-//   const greetingContainer = document.getElementById('greeting-container');
-//   greetingContainer.innerText = greeting;
-// }
 
 window.onload = function () {
     // document.getElementsById('all').checked=true;
-    showAllColumns('all') 
+    showAllColumns('all');
 }
-
 
 function showAllColumns(column) {
   var arrayOfAllColumns, i;
@@ -81,3 +65,17 @@ for (var i = 0; i < btns.length; i++) {
     this.className += " active";
   });
 }
+
+function getServerComments(){
+    fetch('/data')  // sends a request to /my-data-url
+.then(response => response.json()) // parses the response as JSON
+.then((comments) => { // now we can reference the fields in myObject!
+  console.log(comments.Femi);
+  console.log(comments.Dera);
+  console.log(comments.Kamsi);
+
+    const showComments = document.getElementById('comments-container');
+    showComments.innerHTML = 'Femi: ' + comments.Femi + ', Dera: ' + comments.Dera + ', Kamsi: ' + comments.Kamsi;
+});
+}
+

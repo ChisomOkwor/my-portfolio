@@ -26,7 +26,11 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello world!</h1>");
+    response.setContentType("application/json;");
+    // response.getWriter().println("Hello Chisom!");
+    String jsonComments = "{\"Femi\": \"Nice page Chisom\", \"Dera\": \"Try to make the web page reponsive\", \"Kamsi\": \"Kudos\"}";
+    response.getWriter().println(jsonComments);
   }
+
+
 }
