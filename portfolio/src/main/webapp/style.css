@@ -245,3 +245,39 @@ margin-bottom: 0;
    color: whitesmoke;
 }
 
+.userData:nth-of-type(odd){
+  background-color: rgb(212, 243, 212);
+}
+.userData:nth-of-type(even){
+  background-color: #f1f1f1;
+}
+
+.userData{
+    padding: 20px;
+    margin-top: 0px;
+    color: #57607a;
+    width: 85%;
+    list-style-type: none;
+
+}
+.commentStyle{
+    margin-left: 5%;
+    color: #414961;
+    font-size: 18px;
+}
+
+.ContactMeBtn{
+    font-size: 16px;
+    padding: 12px 30px;
+    margin-left: 10%;
+    background-color: #585c6e;
+    color: white;
+    align-self: center;
+    border: 3px solid #faf5fc; 
+    border-radius: 4px;
+}
+
+.ContactMeBtn:hover {
+  background-color: rgb(153, 151, 190);
+  color: white;
+}

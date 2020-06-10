@@ -14,6 +14,12 @@
 
 package com.google.sps.servlets;
 
+import java.io.*; 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 import java.text.SimpleDateFormat;  
 import java.util.Date;  
 import java.util.ArrayList; 
@@ -27,44 +33,72 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-	
-  ArrayList<UserDetails> allData = new ArrayList<UserDetails>(); 
+
+  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("application/json;");
+    Query query = new Query("UserData");
     
-    String json = new Gson().toJson(allData);
-    response.getWriter().println(json);
+    ArrayList<UserData> data = new ArrayList<UserData>();	
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+
+    java.util.Date currentDate = new java.util.Date();  
+    
+    for (Entity entity : results.asIterable()) {
+      long id = entity.getKey().getId();
+      String name = (String) entity.getProperty("name");
+      String email = (String) entity.getProperty("email");
+      String comment = (String) entity.getProperty("comment");
+      Date date = (Date) entity.getProperty("date");
+      UserData newData = new UserData(id, name, email, comment, date);
+      data.add(newData);
+    }
+
+    Gson gson = new Gson();
+    
+    
+
+    response.setContentType("application/json;");
+    response.getWriter().println(gson.toJson(data));
+  }
+
+    
+
+  public class UserData{
+      long id;
+      String name;
+      String email;
+      String comment;
+      Date date;
+
+      UserData(long id, String name, String email, String comment, Date date){
+          this.id = id;
+          this.name = name;
+          this.email = email;
+          this.comment = comment;
+          this.date = date;
+      }
   }
 
   @Override
    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       java.util.Date currentDate=new java.util.Date();  
+       java.util.Date date = new java.util.Date();  
        String name = getParameter(request, "name", "");
        String email = getParameter(request, "email", "");
        String comment = getParameter(request, "comment", "");
-   
-    	UserDetails newData = new UserDetails(name, email, comment, currentDate);
-        allData.add(newData);
+
+        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+        Entity taskEntity = new Entity("UserData");
+    	taskEntity.setProperty("name", name);
+   	 	taskEntity.setProperty("email", email);
+        taskEntity.setProperty("comment", comment);
+   	 	taskEntity.setProperty("date", date);
+        datastore.put(taskEntity);
 
         // Redirect back to the HTML page.
     	response.sendRedirect("/index.html");
     }
-
-    public class UserDetails{
-        String name;
-        String email;
-        String comment;
-        Date currentDate;
-
-        UserDetails(String name, String email, String comment, Date currentDate){
-            this.name = name;
-            this.email = email;
-            this.comment = comment;
-            this.currentDate = currentDate;
-        }
-    }
-
 
 	private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);

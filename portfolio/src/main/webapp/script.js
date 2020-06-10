@@ -14,8 +14,8 @@
 
 
 window.onload = function () {
-    // document.getElementsById('all').checked=true;
-    showAllColumns('all');
+    showAllColumns('project');
+    loadComments()
 }
 
 function showAllColumns(column) {
@@ -65,15 +65,68 @@ for (var i = 0; i < btns.length; i++) {
     this.className += " active";
   });
 }
+function validateForm() {
+  var isEmptyName = document.forms["commentForm"]["name"].value;
+  var isEmptyEmail = document.forms["commentForm"]["email"].value;
+  var isEmptyComment = document.forms["commentForm"]["comment"].value;
 
+  if (isEmptyName == "" || isEmptyEmail== "" || isEmptyComment == "") {
+    alert("All fields must be completed!");
+    return false;
+  }
+}
+function loadComments() {
+  fetch('/data').then(response => response.json()).then((Data) => {
+    const userDataListElement = document.getElementById('commentsContainer');
+    Data.forEach((userData) => {
+      userDataListElement.appendChild(createListElement(userData));
+    })
+  });
+}
 
-function getServerComments(){
-    fetch('/data')  // sends a request to /my-data-url
-.then(response => response.json()) // parses the response as JSON
-.then((comments) => { // now we can reference the fields in myObject!
+ function createListElement(userData) {
+  const userDataElement = document.createElement('li');
+  userDataElement.className = 'userData';
+
+  const commentElement = document.createElement('span');
+  commentElement.innerText = userData.comment;
+  commentElement.className ='commentStyle';
+
+  const nameElement = document.createElement('span');
+  nameElement.innerText = userData.name;
+  nameElement.className ='nameStyle';
+
+  const dateElement = document.createElement('span');
+  dateElement.innerText = userData.date;
+  dateElement.className = 'dateStyle';
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.className = 'deleteBtnStyle'
+
+  deleteButtonElement.addEventListener('click', () => {
+    deleteTask(userData);
+
+    // Remove the task from the DOM.
+    taskElement.remove();
+  });
+
+  var linebreak = document.createElement("br");
+
+  var para = document.createElement('span');               
+  para.innerHTML = "by:  ";        
+
+  var para2 = document.createElement('span');               
+  para2.innerHTML = "    ";                
   
-    const showComments = document.getElementById('comments-container');
-    showComments.innerHTML = 'Name: ' + comments.name + ', Email: ' + comments.email + ', Comment: ' + comments.comment;
-});
+  userDataElement.appendChild(dateElement);
+  userDataElement.appendChild(commentElement);
+  userDataElement.appendChild(linebreak);
+  userDataElement.appendChild(para);
+  userDataElement.appendChild(nameElement);
+  userDataElement.appendChild(para2);
+  userDataElement.appendChild(deleteButtonElement);
+  
+  return userDataElement;
 }
 

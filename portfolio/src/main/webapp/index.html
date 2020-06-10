@@ -14,8 +14,11 @@
 	<!-- Side navigation -->
 	    <div class="sidenav">
         <div class= "nameintro"> 
-        <h1 style="color:whitesmoke; font-family:Didot;" ><strong> CHISOM OKWOR </strong></h1>
+        <h1 style="color:whitesmoke; font-family:Didot; " ><strong> CHISOM OKWOR </strong></h1>
         <p style="color:whitesmoke; font-family:Didot;" > Welcome to my Portfolio Website </p>
+        <button class="ContactMeBtn" onclick="window.location.href='mailto:officialchisom2001@gmail.com';">
+     Say Hello 
+    </button>
         </div>
 
         <div class="menu">
@@ -28,7 +31,7 @@
           <hr />
         <a href="#resume"> <font size="-1">RESUME </font> </a>
             <hr />
-  		<a href="#contact"> <font size="-1">CONTACT</font></a>
+  		<a href="#comments"> <font size="-1">COMMENTS</font></a>
           <hr />
         </div>
 
@@ -209,18 +212,18 @@
         <br> <br>   <br> <br>
 
         <!-- Contact Me section -->
-        <a name="contact"> </a>
+        <a name="comments"> </a>
         <div class="tag">
             <hr width="100%;" color="#24c770" size="5">
-            <h2 class="flag" style="background-color:#1cd68f">CONTACT ME</h2>
+            <h2 class="flag" style="background-color:#1cd68f">COMMENTS</h2>
         </div>
 
         <br> <br>
 
-        <form action="/data" method="POST">
+        <form name="commentForm" action="/data" method="POST" onsubmit="return validateForm()">
         <div class="contact-form">
 
-            <h2 style=" color:#30343f; "> Leave a Comment!<h2/>
+            <h2 style=" color:#30343f; "> Drop a Comment!<h2/>
             <div class="textb"> 
                 <label>  Full Name :  </label>
                 <input type="text" name="name" value="" placeholder="Enter your Name">
@@ -235,12 +238,15 @@
                 <label>  Message :  </label>
                 <textarea type="text" name="comment">  </textarea>
             </div>
-
             <input id="submitComments" type="submit" onclick="getServerComments()"> 
 
         </div>
         </form>
-        <br> <br> <br><br>
+        <br> <br> 
+
+        <h2 style="color: #24c770"> Comments </h2>
+        <ul id="commentsContainer"> </ul>
+        <br><br>
 
     <!-- main content end -->
 
