@@ -160,7 +160,7 @@ margin-bottom: 0;
 }
 
 /* Send button. */
-.sendbtn{
+#submitComments{
     display: block;
     background: #1cd68f;
     padding: 14px 0;
