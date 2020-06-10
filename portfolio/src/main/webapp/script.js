@@ -15,9 +15,8 @@
 
 window.onload = function () {
     // document.getElementsById('all').checked=true;
-    showAllColumns('all') 
+    showAllColumns('all');
 }
-
 
 function showAllColumns(column) {
   var arrayOfAllColumns, i;
@@ -66,3 +65,17 @@ for (var i = 0; i < btns.length; i++) {
     this.className += " active";
   });
 }
+
+function getServerComments(){
+    fetch('/data')  // sends a request to /my-data-url
+.then(response => response.json()) // parses the response as JSON
+.then((comments) => { // now we can reference the fields in myObject!
+  console.log(comments.Femi);
+  console.log(comments.Dera);
+  console.log(comments.Kamsi);
+
+    const showComments = document.getElementById('comments-container');
+    showComments.innerHTML = 'Femi: ' + comments.Femi + ', Dera: ' + comments.Dera + ', Kamsi: ' + comments.Kamsi;
+});
+}
+
