@@ -33,68 +33,69 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-  final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("UserData");
-    ArrayList<UserData> data = new ArrayList<UserData>();	
-    PreparedQuery results = datastore.prepare(query);
+   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      Query query = new Query("UserData");
+      ArrayList<UserData> data = new ArrayList<UserData>();	
+      PreparedQuery results = datastore.prepare(query);
 
-    Date currentDate = new Date();  
+      Date currentDate = new Date();  
     
-    for (Entity entity : results.asIterable()) { 
-      long id = entity.getKey().getId();
-      String name = (String) entity.getProperty("name");
-      String email = (String) entity.getProperty("email");
-      String comment = (String) entity.getProperty("comment");
-      Date date = (Date) entity.getProperty("date");
-      UserData newData = new UserData(id, name, email, comment, date);
-      data.add(newData);
+      for (Entity entity : results.asIterable()) { 
+        long id = entity.getKey().getId();
+        String name = (String) entity.getProperty("name");
+        String email = (String) entity.getProperty("email");
+        String comment = (String) entity.getProperty("comment");
+        Date date = (Date) entity.getProperty("date");
+        UserData newData = new UserData(id, name, email, comment, date);
+        data.add(newData);
+        }
+
+        response.setContentType("application/json;");
+
+        Gson gson = new Gson();
+        int numComments = getNumComments(request, "numValue", 5);
+        
+
+        if (numComments > data.size()){ 
+            response.getWriter().println(gson.toJson(data.subList(0, data.size())));
+        }
+        else{
+            response.getWriter().println(gson.toJson(data.subList(0, numComments )));
+        }
     }
 
-    Gson gson = new Gson();
-    int numComments = filterCommentsByNum(request, "numValue", 4);
-    
-    response.setContentType("application/json;");
-    if (numComments > data.size()){ 
-    response.getWriter().println(gson.toJson(data.subList(0, data.size())));
+    public static class UserData{
+        long id;
+        String name;
+        String email;
+        String comment;
+        Date date;
+
+        UserData(long id, String name, String email, String comment, Date date){
+            this.id = id;
+            this.name = name;
+            this.email = email;
+            this.comment = comment;
+            this.date = date;
+        }
     }
-    else{
-    response.getWriter().println(gson.toJson(data.subList(0, numComments )));
-    }
-  }
 
-  public static class UserData{
-      long id;
-      String name;
-      String email;
-      String comment;
-      Date date;
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        Date date = new Date();  
+        String name = getParameter(request, "name", "");
+        String email = getParameter(request, "email", "");
+        String comment = getParameter(request, "comment", "");
 
-      UserData(long id, String name, String email, String comment, Date date){
-          this.id = id;
-          this.name = name;
-          this.email = email;
-          this.comment = comment;
-          this.date = date;
-      }
-  }
+        if(name.trim().isEmpty()){ 
+            throw new IllegalArgumentException("Name not entered.");}
 
-  @Override
-   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       Date date = new Date();  
-       String name = getParameter(request, "name", "");
-       String email = getParameter(request, "email", "");
-       String comment = getParameter(request, "comment", "");
+        if (comment.trim().isEmpty()){ 
+            throw new IllegalArgumentException("Comment field empty.");}
 
-        if(name.isBlank())
-         throw new IllegalArgumentException("Name not entered.");
-
-        if (comment.isBlank()) 
-         throw new IllegalArgumentException("Comment field empty.");
-
-        DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         Entity taskEntity = new Entity("UserData");
     	taskEntity.setProperty("name", name);
    	 	taskEntity.setProperty("email", email);
@@ -106,20 +107,23 @@ public class DataServlet extends HttpServlet {
     	response.sendRedirect("/index.html");
     }
 
-    private int filterCommentsByNum(HttpServletRequest request,  String name, int defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-        return (defaultValue);
-    }
+    private int getNumComments(HttpServletRequest request,  String name, int defaultValue) {
+        String value = request.getParameter(name);
+        if (value == null) {
+            return (defaultValue);
+        }
+
         return Integer.parseInt(value);
     }
 
-    
 	private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-      return defaultValue;
-    }
-    return value;
+        String value = request.getParameter(name);
+        if (value == null) {
+        return defaultValue;
+        }
+        return value;
     }
 }
+
+
+     

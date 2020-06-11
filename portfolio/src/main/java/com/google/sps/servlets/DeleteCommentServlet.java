@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet responsible for deleting Data. */
 @WebServlet("/delete-data")
 public class DeleteCommentServlet extends HttpServlet {
-   final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+   private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
