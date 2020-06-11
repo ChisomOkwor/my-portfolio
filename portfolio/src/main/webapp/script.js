@@ -78,6 +78,7 @@ function validateForm() {
 function loadComments() {
   fetch('/data').then(response => response.json()).then((Data) => {
     const userDataListElement = document.getElementById('commentsContainer');
+    userDataListElement.textContent = '';
     Data.forEach((userData) => {
       userDataListElement.appendChild(createListElement(userData));
     })
@@ -105,10 +106,10 @@ function loadComments() {
   deleteButtonElement.className = 'deleteBtnStyle'
 
   deleteButtonElement.addEventListener('click', () => {
-    deleteTask(userData);
+    deleteData(userData);
 
     // Remove the task from the DOM.
-    taskElement.remove();
+    userDataElement.remove();
   });
 
   var linebreak = document.createElement("br");
@@ -128,5 +129,12 @@ function loadComments() {
   userDataElement.appendChild(deleteButtonElement);
   
   return userDataElement;
+}
+
+/** Tells the server to delete the data. */
+function deleteData(data) {
+  const params = new URLSearchParams();
+  params.append('id', data.id);
+  fetch('/delete-data', {method: 'POST', body: params});
 }
 

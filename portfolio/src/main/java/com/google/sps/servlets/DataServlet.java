@@ -33,19 +33,18 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
+  final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("UserData");
-    
     ArrayList<UserData> data = new ArrayList<UserData>();	
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
     java.util.Date currentDate = new java.util.Date();  
     
-    for (Entity entity : results.asIterable()) {
+
+    for (Entity entity : results.asIterable()) { 
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty("name");
       String email = (String) entity.getProperty("email");
@@ -56,14 +55,16 @@ public class DataServlet extends HttpServlet {
     }
 
     Gson gson = new Gson();
+    int numComments = filterCommentsByNum(request, "numComments", 4);
     
-    
-
     response.setContentType("application/json;");
-    response.getWriter().println(gson.toJson(data));
+    if (numComments > data.size()){ 
+    response.getWriter().println(gson.toJson(data.subList(0, data.size())));
+    }
+    else{
+    response.getWriter().println(gson.toJson(data.subList(0, numComments )));
+    }
   }
-
-    
 
   public class UserData{
       long id;
@@ -100,6 +101,15 @@ public class DataServlet extends HttpServlet {
     	response.sendRedirect("/index.html");
     }
 
+    private int filterCommentsByNum(HttpServletRequest request,  String name, int defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+        return (defaultValue);
+    }
+        return Integer.parseInt(value);
+    }
+
+    
 	private String getParameter(HttpServletRequest request, String name, String defaultValue) {
     String value = request.getParameter(name);
     if (value == null) {

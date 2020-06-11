@@ -14,10 +14,10 @@
 	<!-- Side navigation -->
 	    <div class="sidenav">
         <div class= "nameintro"> 
-        <h1 style="color:whitesmoke; font-family:Didot; " ><strong> CHISOM OKWOR </strong></h1>
-        <p style="color:whitesmoke; font-family:Didot;" > Welcome to my Portfolio Website </p>
+        <h1 style="color:whitesmoke; font-family:Didot; margin-bottom:0;" ><strong> CHISOM OKWOR </strong></h1>
+        <p style="color:whitesmoke; font-family:Didot; margin-top: 0;" > Welcome to my Portfolio Website </p>
         <button class="ContactMeBtn" onclick="window.location.href='mailto:officialchisom2001@gmail.com';">
-     Say Hello 
+     Get in touch
     </button>
         </div>
 
@@ -239,12 +239,16 @@
                 <textarea type="text" name="comment">  </textarea>
             </div>
             <input id="submitComments" type="submit" onclick="getServerComments()"> 
-
         </div>
+
+        <h2 style="color: #24c770"> Comments </h2>
+
+        <label for="quantity">Filter number of comments(between 1 and 6):</label>
+        <input  onchange="loadComments()" type="number" id="numComments" name="numComments" value="3" min="1" max="6">
         </form>
         <br> <br> 
 
-        <h2 style="color: #24c770"> Comments </h2>
+          
         <ul id="commentsContainer"> </ul>
         <br><br>
 
