@@ -41,9 +41,8 @@ public class DataServlet extends HttpServlet {
     ArrayList<UserData> data = new ArrayList<UserData>();	
     PreparedQuery results = datastore.prepare(query);
 
-    java.util.Date currentDate = new java.util.Date();  
+    Date currentDate = new Date();  
     
-
     for (Entity entity : results.asIterable()) { 
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty("name");
@@ -55,7 +54,7 @@ public class DataServlet extends HttpServlet {
     }
 
     Gson gson = new Gson();
-    int numComments = filterCommentsByNum(request, "numComments", 4);
+    int numComments = filterCommentsByNum(request, "numValue", 4);
     
     response.setContentType("application/json;");
     if (numComments > data.size()){ 
@@ -66,7 +65,7 @@ public class DataServlet extends HttpServlet {
     }
   }
 
-  public class UserData{
+  public static class UserData{
       long id;
       String name;
       String email;
@@ -84,10 +83,16 @@ public class DataServlet extends HttpServlet {
 
   @Override
    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-       java.util.Date date = new java.util.Date();  
+       Date date = new Date();  
        String name = getParameter(request, "name", "");
        String email = getParameter(request, "email", "");
        String comment = getParameter(request, "comment", "");
+
+        if(name.isBlank())
+         throw new IllegalArgumentException("Name not entered.");
+
+        if (comment.isBlank()) 
+         throw new IllegalArgumentException("Comment field empty.");
 
         DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
         Entity taskEntity = new Entity("UserData");

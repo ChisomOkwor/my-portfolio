@@ -75,6 +75,7 @@ function validateForm() {
     return false;
   }
 }
+
 function loadComments() {
   fetch('/data').then(response => response.json()).then((Data) => {
     const userDataListElement = document.getElementById('commentsContainer');
@@ -84,6 +85,22 @@ function loadComments() {
     })
   });
 }
+
+function loadComments2() { 
+    const numValue = document.getElementById('numComments').value;
+
+  fetch('/data?numValue='+numValue).then(response => response.json()).then((Data) => {
+    const userDataListElement = document.getElementById('commentsContainer');
+    userDataListElement.textContent = '';
+    Data.forEach((userData) => {
+      userDataListElement.appendChild(createListElement(userData));
+    })
+  });
+}
+
+
+//    fetch('data', {method: 'POST', body: numValue});
+
 
  function createListElement(userData) {
   const userDataElement = document.createElement('li');
