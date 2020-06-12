@@ -27,12 +27,12 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet responsible for deleting Data. */
 @WebServlet("/delete-data")
 public class DeleteCommentServlet extends HttpServlet {
-   private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
     @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    long id = Long.parseLong(request.getParameter("id"));
-    Key dataEntityKey = KeyFactory.createKey("UserData", id);
-    datastore.delete(dataEntityKey);
-  }
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        long id = Long.parseLong(request.getParameter("id"));
+        Key dataEntityKey = KeyFactory.createKey("UserData", id);
+        datastore.delete(dataEntityKey);
+    }
 }
