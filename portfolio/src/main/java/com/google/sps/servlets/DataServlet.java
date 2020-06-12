@@ -56,15 +56,11 @@ public class DataServlet extends HttpServlet {
         response.setContentType("application/json;");
 
         Gson gson = new Gson();
-        int numComments = getNumComments(request, "numValue", 5);
+        final int numCommentsUserSelects = getNumCommentsUserSelects(request, "numValue", 5);
         
+        final int numCommentsDisplayed = Math.min(numCommentsUserSelects, data.size());
+	    response.getWriter().println(gson.toJson(data.subList(0, numCommentsDisplayed)));
 
-        if (numComments > data.size()){ 
-            response.getWriter().println(gson.toJson(data.subList(0, data.size())));
-        }
-        else{
-            response.getWriter().println(gson.toJson(data.subList(0, numComments )));
-        }
     }
 
     public static class UserData{
@@ -107,7 +103,7 @@ public class DataServlet extends HttpServlet {
     	response.sendRedirect("/index.html");
     }
 
-    private int getNumComments(HttpServletRequest request,  String name, int defaultValue) {
+    private int getNumCommentsUserSelects(HttpServletRequest request,  String name, int defaultValue) {
         String value = request.getParameter(name);
         if (value == null) {
             return (defaultValue);
