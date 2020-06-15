@@ -280,3 +280,11 @@ margin-bottom: 0;
   background-color: rgb(153, 151, 190);
   color: white;
 }
+
+#map {
+  border: thin solid black;
+  height: 500px;
+  width: 800px;
+  position: relative;
+  margin: auto;
+}
