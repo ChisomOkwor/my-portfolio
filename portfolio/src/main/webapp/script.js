@@ -144,9 +144,18 @@ function deleteData(data) {
     });
 }
 
+// Creates a Map with Markers of Chick fil A locations in Tennessee
 function createMap() {
-  const map = new google.maps.Map(
-      document.getElementById('map'),
-      {center: {lat: 37.422, lng: -122.084}, zoom: 16});
-    
+    const map = new google.maps.Map(
+    document.getElementById('map'),
+    {center: {lat: 35.832308, lng: -86.317786}, zoom: 7});
+
+
+    fetch('/chicFilA-data').then(response => response.json()).then((chicFilACoordinates) => {
+    chicFilACoordinates.forEach((chicFilACoordinate) => {
+      new google.maps.Marker(
+          {position: {lat: chicFilACoordinate.lat, lng: chicFilACoordinate.lng}, map: map});
+    });
+  });
 }
+

@@ -284,7 +284,7 @@ margin-bottom: 0;
 #map {
   border: thin solid black;
   height: 500px;
-  width: 800px;
+  width: 100%;
   position: relative;
   margin: auto;
 }
