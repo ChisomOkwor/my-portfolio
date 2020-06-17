@@ -29,11 +29,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/chicFilA-data")
 public class ChicFilATennesseServlet extends HttpServlet {
 
-    private final Collection chicFilACoordinates = new ArrayList<>();
+    private final Collection <ChicFilACoordinate> chicFilACoordinates = new ArrayList<>();
     
     @Override
     public void init() {
-
+    
         Scanner scanner = new Scanner(getServletContext().getResourceAsStream("/WEB-INF/chicFilA-TN-data.csv"));
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
