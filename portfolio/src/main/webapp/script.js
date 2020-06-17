@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+
 window.onload = function() {
     showAllColumns('project');
     loadComments();
@@ -148,8 +150,16 @@ function deleteData(data) {
 function createMap() {
     const map = new google.maps.Map(
     document.getElementById('map'),
-    {center: {lat: 35.832308, lng: -86.317786}, zoom: 7});
+    {center: {lat: 35.832308, lng: -86.317786}, zoom: 8});
 
+    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+    
+    const fiskUniversityMarker = new google.maps.Marker({
+    position: {lat: 36.1663542, lng:  -86.8031514},
+    map: map,
+    title: 'My College Campus',
+    icon: iconBase + 'parking_lot_maps.png'
+    });
 
     fetch('/chicFilA-data').then(response => response.json()).then((chicFilACoordinates) => {
     chicFilACoordinates.forEach((chicFilACoordinate) => {

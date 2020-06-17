@@ -30,10 +30,9 @@ import javax.servlet.http.HttpServletResponse;
 public class ChicFilATennesseServlet extends HttpServlet {
 
     private Collection < ChicFilACoordinate > chicFilACoordinates;
-
+    
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+    public void init() {
         chicFilACoordinates = new ArrayList < > ();
 
         Scanner scanner = new Scanner(getServletContext().getResourceAsStream("/WEB-INF/chicFilA-TN-data.csv"));
@@ -47,7 +46,10 @@ public class ChicFilATennesseServlet extends HttpServlet {
             chicFilACoordinates.add(new ChicFilACoordinate(lat, lng));
         }
         scanner.close();
+    }
 
+    @Override
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("application/json");
         Gson gson = new Gson();
