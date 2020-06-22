@@ -17,7 +17,7 @@
 			<div class="nameintro">
 				<h1 style="color:whitesmoke; font-family:Didot; margin-bottom:0;"><strong> CHISOM OKWOR </strong></h1>
 				<p style="color:whitesmoke; font-family:Didot; margin-top: 0;">Welcome to my Portfolio Website</p>
-				<button class="ContactMeBtn" onclick="window.location.href='mailto:officialchisom2001@gmail.com';">Get in touch</button>
+				<button id="loginBtn" onclick="window.location.href='/login';">LOGIN</button>
 			</div>
 			<div class="menu">
 				<hr />	<a href="#home"><font size="-1">HOME </font> </a>
@@ -47,6 +47,7 @@
 			<!-- Intro greeting -->
 			<h1 style="text-align:center; margin-bottom: -1px; color: #5c57ad;"> HELLO! </h1>
 			<p style="text-align:center; color: #8987ab;">I'm a Computer Science undergrad passionate about building things that make people's lives better.</p>
+            <button class="ContactMeBtn" onclick="window.location.href='mailto:officialchisom2001@gmail.com';">Get in touch</button>
 			<br>
 			<br>
 
@@ -210,17 +211,15 @@
 					</div>
 					<br>
 					<br>
-					<form name="commentForm" action="/data" method="POST" onsubmit="return validateForm()">
+
+                <!-- Comment Form, Displayed when user is logged in -->
+                <div id="commentForm" style="display:none;">
+				<form  name="commentForm" action="/data" method="POST" onsubmit="return validateForm()">
 						<div class="contact-form">
 							<h2 style=" color:#30343f; "> Drop a Comment!<h2/>
             <div class="textb"> 
-                <label>  Full Name :  </label>
+                <label>  Name :  </label>
                 <input type="text" name="name" value="" placeholder="Enter your Name">
-            </div>
-
-            <div class="textb"> 
-                <label> Email :  </label>
-                <input type="text" name="email" value="" placeholder="Enter your Email">
             </div>
 
             <div class="textb"> 
@@ -230,10 +229,14 @@
             <input id="submitComments" type="submit" onclick="getServerComments()"> 
         </div>
         </form>
-
-        <h2 style="color: #24c770"> Comments </h2>
+        </div>
+        <!-- Comment Form end -->
+        
+        <div id="aboutCommentsContainer"> </div>
+        <!-- <h2 style="color: #24c770"> Login to add Comments </h2> -->
 							<label for="quantity">Filter number of comments(between 1 and 10):</label>
 							<input onchange="loadComments()" type="number" id="numComments" name="numComments" value="5" min="1" max="10">
+
 							<br>
 							<br>
 							<ul id="commentsContainer"></ul>

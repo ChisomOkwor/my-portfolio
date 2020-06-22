@@ -269,15 +269,32 @@ margin-bottom: 0;
 .ContactMeBtn{
     font-size: 16px;
     padding: 12px 30px;
-    background-color: #585c6e;
+    background-color: rgb(153, 151, 190);
+    color: white;
+    align-self: center;
+    border: 3px solid #a8a2aa; 
+    border-radius: 4px;
+    margin:0 auto;
+    display:block;
+}
+
+.ContactMeBtn:hover {
+  background-color: #585c6e;
+  color: white;
+}
+
+#loginBtn{
+    font-size: 16px;
+    padding: 12px 30px;
+    background-color: #585c6e; 
     color: white;
     align-self: center;
     border: 3px solid #faf5fc; 
     border-radius: 4px;
 }
 
-.ContactMeBtn:hover {
-  background-color: rgb(153, 151, 190);
+#loginBtn:hover {
+  background-color: rgb(153, 151, 190); 
   color: white;
 }
 

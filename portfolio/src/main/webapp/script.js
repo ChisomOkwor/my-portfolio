@@ -15,9 +15,10 @@
 
 
 window.onload = function() {
-    showAllColumns('project');
+    showAllColumns('hacks');
     loadComments();
     createMap();
+    showCommentForm();
 }
 
 function showAllColumns(column) {
@@ -80,8 +81,8 @@ function validateForm() {
 }
 
 function loadComments() {
-    const numValue = document.getElementById('numComments').value;
-    fetch('/data?numValue=' + numValue).then(response => response.json()).then((Data) => {
+        const numValue = document.getElementById('numComments').value;
+        fetch('/data?numValue=' + numValue).then(response => response.json()).then((Data) => {
         const userDataListElement = document.getElementById('commentsContainer');
         userDataListElement.textContent = '';
         Data.forEach((userData) => {
@@ -169,3 +170,30 @@ function createMap() {
   });
 }
 
+
+// Displays comment form when the user is Logged in
+function showCommentForm() {
+        const numValue = document.getElementById('numComments').value;
+        fetch('/login').then(response => response.text()).then((loginStatus) => {
+        var isLoggedIn = loginStatus.split('\n')[2];
+
+        // Hide Comment Form by default
+        document.getElementById("commentForm").style.display = "none";
+
+        document.getElementById("aboutCommentsContainer").innerHTML =  
+            "<h2 style='color: #24c770'> Login to add Comments </h2>"; 
+
+        document.getElementById("loginBtn").textContent = 'LOGIN';
+
+        if(isLoggedIn == "true"){
+        document.getElementById("commentForm").style.display = "block";
+
+        document.getElementById("aboutCommentsContainer").innerHTML =  
+              "<h2 style='color: #24c770'> Comments</h2>"; 
+
+            // Show logout button
+            document.getElementById("loginBtn").textContent = 'LOG OUT';
+        }
+        
+    });
+}
