@@ -1,83 +1,83 @@
 <!DOCTYPE html>
 <html>
 <element onload="myScript">
-
-	<head>
-		<meta charset="UTF-8">
-		<title>My Portfolio</title>
-
+ 
+    <head>
+        <meta charset="UTF-8">
+        <title>My Portfolio</title>
+ 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYaDXXQxbqmCQ6yOkEnk1bV_-fx3_cXNo"></script>
-		<link rel="stylesheet" href="style.css">
-		<script src="script.js"></script>
-	</head>
-	<body>
-		<a name="home"></a>
-		<!-- Side navigation -->
-		<div class="sidenav">
-			<div class="nameintro">
-				<h1 style="color:whitesmoke; font-family:Didot; margin-bottom:0;"><strong> CHISOM OKWOR </strong></h1>
-				<p style="color:whitesmoke; font-family:Didot; margin-top: 0;">Welcome to my Portfolio Website</p>
-				<button id="loginBtn" onclick="window.location.href='/login';">LOGIN</button>
-			</div>
-			<div class="menu">
-				<hr />	<a href="#home"><font size="-1">HOME </font> </a>
-				<hr />
-				<a href="#about"> <font size="-1">ABOUT</font> 
-				</a>
-				<hr />
-				<a href="#portfolio"> <font size="-1">PORTFOLIO</font> 
-				</a>
-				<hr />
-				<a href="#funFact"> <font size="-1">FUN FACT</font> 
-				</a>
-				<hr />
-				<a href="#comments"> <font size="-1">COMMENTS</font>
-				</a>
-				<hr />
-			</div>
-		</div>
-		<!--Side navigation end-->
-
-		<!-- Background Image at the top -->
-		<img id="topImg" src="images/background1.jpeg">
-
-		<!-- main content -->
-		<div id="maincontent">
-
-			<!-- Intro greeting -->
-			<h1 style="text-align:center; margin-bottom: -1px; color: #5c57ad;"> HELLO! </h1>
-			<p style="text-align:center; color: #8987ab;">I'm a Computer Science undergrad passionate about building things that make people's lives better.</p>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+    </head>
+    <body>
+        <a name="home"></a>
+        <!-- Side navigation -->
+        <div class="sidenav">
+            <div class="nameintro">
+                <h1 style="color:whitesmoke; font-family:Didot; margin-bottom:0;"><strong> CHISOM OKWOR </strong></h1>
+                <p style="color:whitesmoke; font-family:Didot; margin-top: 0;">Welcome to my Portfolio Website</p>
+                <button id="loginBtn" onclick="fetchLogin();">LOGIN</button>
+            </div>
+            <div class="menu">
+                <hr />  <a href="#home"><font size="-1">HOME </font> </a>
+                <hr />
+                <a href="#about"> <font size="-1">ABOUT</font> 
+                </a>
+                <hr />
+                <a href="#portfolio"> <font size="-1">PORTFOLIO</font> 
+                </a>
+                <hr />
+                <a href="#funFact"> <font size="-1">FUN FACT</font> 
+                </a>
+                <hr />
+                <a href="#comments"> <font size="-1">COMMENTS</font>
+                </a>
+                <hr />
+            </div>
+        </div>
+        <!--Side navigation end-->
+ 
+        <!-- Background Image at the top -->
+        <img id="topImg" src="images/background1.jpeg">
+ 
+        <!-- main content -->
+        <div id="maincontent">
+ 
+            <!-- Intro greeting -->
+            <h1 style="text-align:center; margin-bottom: -1px; color: #5c57ad;"> HELLO! </h1>
+            <p style="text-align:center; color: #8987ab;">I'm a Computer Science undergrad passionate about building things that make people's lives better.</p>
             <button class="ContactMeBtn" onclick="window.location.href='mailto:officialchisom2001@gmail.com';">Get in touch</button>
-			<br>
-			<br>
-
-			<!-- About me Section -->
-			<a name="about"></a>
-			<div class="tag">
-				<hr width="100%;" color="#f59042" size="5">
-				<h2 class="flag" style="background-color:#ffae70;">  ABOUT </h2> 
-			</div>
-			<br>
-			<br>
-
-			<!-- Profile Photo -->
-			<div>
-				<img style="margin-bottom:20px; " class="profilePhoto" src="images/frothy.png" alt="avatar" class="profile-pic">
-			</div>
-
-			<!-- Image Caption -->
-			<h3 style="text-align:center;color:#f59042;"> I'm on <a href="https://github.com/ChisomOkwor/" style="color:#f59042; text-decoration:none;"> GitHub <a/> and <a href="https://www.linkedin.com/in/chisomthesteminist/" style="color:#f59042; text-decoration:none;"> Linkedin </a> </h3>
-			<p style="text-align:center; margin-top:-1px; color:#f59042;">Check them out</p>
-			<!-- Personal story section -->
-			<div id="myStory">
-				<h2 style="color: #f59042;">FROM CLULESS TO PROGRAMMER </h2>
-				<p style="color: #8987ab">Throughout my 6 years of Secondary School, I had no interest in Computer Science. My knowledge of Technology began in my final year when I joined the CISCO Computer Club. I can recall coding fun and interactive stories with my friends using <a href="https://scratch.mit.edu/" style="color: #746fde; text-decoration:none;"> SCRATCH. </a> 
-					<br>Months after joining the club, I was selected to attend a <a href="https://www.cisco.com/c/en_dz/training-events/events-webinars.html" style="color: #746fde; text-decoration:none;"> CISCO Networking Conference. <a/>
+            <br>
+            <br>
+ 
+            <!-- About me Section -->
+            <a name="about"></a>
+            <div class="tag">
+                <hr width="100%;" color="#f59042" size="5">
+                <h2 class="flag" style="background-color:#ffae70;">  ABOUT </h2> 
+            </div>
+            <br>
+            <br>
+ 
+            <!-- Profile Photo -->
+            <div>
+                <img style="margin-bottom:20px; " class="profilePhoto" src="images/frothy.png" alt="avatar" class="profile-pic">
+            </div>
+ 
+            <!-- Image Caption -->
+            <h3 style="text-align:center;color:#f59042;"> I'm on <a href="https://github.com/ChisomOkwor/" style="color:#f59042; text-decoration:none;"> GitHub <a/> and <a href="https://www.linkedin.com/in/chisomthesteminist/" style="color:#f59042; text-decoration:none;"> Linkedin </a> </h3>
+            <p style="text-align:center; margin-top:-1px; color:#f59042;">Check them out</p>
+            <!-- Personal story section -->
+            <div id="myStory">
+                <h2 style="color: #f59042;">FROM CLULESS TO PROGRAMMER </h2>
+                <p style="color: #8987ab">Throughout my 6 years of Secondary School, I had no interest in Computer Science. My knowledge of Technology began in my final year when I joined the CISCO Computer Club. I can recall coding fun and interactive stories with my friends using <a href="https://scratch.mit.edu/" style="color: #746fde; text-decoration:none;"> SCRATCH. </a> 
+                    <br>Months after joining the club, I was selected to attend a <a href="https://www.cisco.com/c/en_dz/training-events/events-webinars.html" style="color: #746fde; text-decoration:none;"> CISCO Networking Conference. <a/>
                 There, I was introduced to 3D printing, Computer Networks, 
                 and the tech world in general. 
                 I was inspired, but still clueless about a Career in Tech.
                 <br>
-
+ 
                 My love for programming was spurred by the 
                 <a href="https://buildyourfuture.withgoogle.com/programs/googleinresidence/" style="color: #746fde; text-decoration:none;"> Google in Residence Program <a/> (GIR) in my
                 <a href="https://www.fisk.edu/" style="color: #746fde; text-decoration:none;"> University. <a/> 
@@ -87,7 +87,7 @@
                 Technology inspires me everyday, and I always enjoy the challenge!
             </p>
         </div>
-
+ 
         <br>
         <br>
         <br>
@@ -95,133 +95,133 @@
         
         <!-- Portfolio Section -->
         <a name="portfolio"> </a>
-					<div class="tag">
-						<hr width="100%;" color="#c7247e" size="5">
-						<h2 class="flag" style="background-color:#e02f90">PORTFOLIO</h2>
-					</div>
-					<!-- Navigation Buttons for Portfolio -->
-					<div id="myBtnContainer">
-						<button id="all" class="btn" onclick="showAllColumns('all')">Show all</button>
-						<button class="btn" onclick="showAllColumns('project')">Projects</button>
-						<button class="btn" onclick="showAllColumns('hacks')">Hackathons</button>
-						<button class="btn" onclick="showAllColumns('hobbies')">Hobbies</button>
-					</div>
-					<!-- Portfolio Gallery Grid -->
-					<div class="row">
-						<div class="column project">
-							<a href="https://smartrivia-jeopardy.firebaseapp.com/">
-								<div class="content">
-									<img src="images/proj1.jpg" alt="Proj1" style="width:100%">
-									<h4> <a href="https://smartrivia-jeopardy.firebaseapp.com/" style="color: #746fde; text-decoration:none;"> Smartrivia <a></h4>
-									<p>My first deployed application; Created using the Jeopardy API. Check it out!</p>
-								</div>
-							</a>
-						</div>
-						<div class="column project">
-							<a href="https://github.com/ChisomOkwor/Campus-Connect">
-								<div class="content">
-									<img src="images/proj2.jpeg" alt="Proj2" style="width:100%;">
-									<h4> <a href="https://github.com/ChisomOkwor/Campus-Connect" style="color: #746fde; text-decoration:none;">Campus Connect </a></h4>
-									<p>My first team project; Built to help students become more connected on campus.</p>
-								</div>
-							</a>
-						</div>
-						<div class="column project">
-							<a href="https://github.com/ChisomOkwor/thriftina">
-								<div class="content">
-									<img src="images/proj3.jpeg" alt="Proj3" style="width:100%; ">
-									<h4> <a href="https://github.com/ChisomOkwor/thriftina" style="color: #746fde; text-decoration:none;">Thriftina </a></h4>
-									<p>My most recent project; Helpes people save money by comparing store prices</p>
-								</div>
-							</a>
-						</div>
-						<div class="column hacks">
-							<div class="content">
-								<img src="images/hack1.jpg" alt="Hacks" style="width:100%; ">
-								<h4 style="color: #746fde"> Google Nash Hack</h4>
-								<p>My first hackathon</p>
-							</div>
-						</div>
-						<div class="column hacks">
-							<div class="content">
-								<img src="images/hack2.jpg" alt="Hacks1" style="width:100%;">
-								<h4 style="color: #746fde">Capital One SES</h4>
-								<p>My most recent Hackthon</p>
-							</div>
-						</div>
-						<div class="column hacks">
-							<div class="content">
-								<img src="images/hack3.jpg" alt="Hacks2" style="width:100%;">
-								<h4 style="color: #746fde">Dell Innovation lab</h4>
-								<p>A hackthon my team came First Place</p>
-							</div>
-						</div>
-						<div class="column hobbies">
-							<div class="content">
-								<img src="images/hobby3.jpg" alt="Hobby1" style="width:100%; ">
-								<h4 style="color: #746fde">Food and Movies</h4>
-								<p>I really enjoy spending time in a chilly space, watching shows, and eating spicy food.</p>
-							</div>
-						</div>
-						<div class="column hobbies">
-							<div class="content">
-								<img src="images/hobby4.jpg" alt="Hobby2" style="width:100%; ">
-								<h4 style="color: #746fde">Drawing and Painting</h4>
-								<p>Recently realized I love doodling, painting, and drawing stuff. I find it relaxing.</p>
-							</div>
-						</div>
-						<div class="column hobbies" id="anime">
-							<div class="content">
-								<img src="images/hobby1.jpeg" alt="Hobby3" style="width:100%; ">
-								<h4 style="color: #746fde">Fashion Design</h4>
-								<p>Spent 3 months learning sewing at a Fashion School in Lagos. I make clothes for myself and others in my spare time.</p>
-							</div>
-						</div>
-						<!-- END GRID -->
-					</div>
-					<!-- Portfolio end -->
-					<br>
-					<br>
-					<br>
-					<br>
-					<!-- Embeded Map Section-->
-
-					<a name="funFact"></a>
-
-					<div class="tag">
-						<hr width="100%;" color="#247bc7" size="5">
-						<h2 class="flag" style="background-color:#3091e6">Fun fact</h2>
-					</div>
-					<br>
-					<br>
+                    <div class="tag">
+                        <hr width="100%;" color="#c7247e" size="5">
+                        <h2 class="flag" style="background-color:#e02f90">PORTFOLIO</h2>
+                    </div>
+                    <!-- Navigation Buttons for Portfolio -->
+                    <div id="myBtnContainer">
+                        <button id="all" class="btn" onclick="showAllColumns('all')">Show all</button>
+                        <button class="btn" onclick="showAllColumns('project')">Projects</button>
+                        <button class="btn" onclick="showAllColumns('hacks')">Hackathons</button>
+                        <button class="btn" onclick="showAllColumns('hobbies')">Hobbies</button>
+                    </div>
+                    <!-- Portfolio Gallery Grid -->
+                    <div class="row">
+                        <div class="column project">
+                            <a href="https://smartrivia-jeopardy.firebaseapp.com/">
+                                <div class="content">
+                                    <img src="images/proj1.jpg" alt="Proj1" style="width:100%">
+                                    <h4> <a href="https://smartrivia-jeopardy.firebaseapp.com/" style="color: #746fde; text-decoration:none;"> Smartrivia <a></h4>
+                                    <p>My first deployed application; Created using the Jeopardy API. Check it out!</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="column project">
+                            <a href="https://github.com/ChisomOkwor/Campus-Connect">
+                                <div class="content">
+                                    <img src="images/proj2.jpeg" alt="Proj2" style="width:100%;">
+                                    <h4> <a href="https://github.com/ChisomOkwor/Campus-Connect" style="color: #746fde; text-decoration:none;">Campus Connect </a></h4>
+                                    <p>My first team project; Built to help students become more connected on campus.</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="column project">
+                            <a href="https://github.com/ChisomOkwor/thriftina">
+                                <div class="content">
+                                    <img src="images/proj3.jpeg" alt="Proj3" style="width:100%; ">
+                                    <h4> <a href="https://github.com/ChisomOkwor/thriftina" style="color: #746fde; text-decoration:none;">Thriftina </a></h4>
+                                    <p>My most recent project; Helpes people save money by comparing store prices</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="column hacks">
+                            <div class="content">
+                                <img src="images/hack1.jpg" alt="Hacks" style="width:100%; ">
+                                <h4 style="color: #746fde"> Google Nash Hack</h4>
+                                <p>My first hackathon</p>
+                            </div>
+                        </div>
+                        <div class="column hacks">
+                            <div class="content">
+                                <img src="images/hack2.jpg" alt="Hacks1" style="width:100%;">
+                                <h4 style="color: #746fde">Capital One SES</h4>
+                                <p>My most recent Hackthon</p>
+                            </div>
+                        </div>
+                        <div class="column hacks">
+                            <div class="content">
+                                <img src="images/hack3.jpg" alt="Hacks2" style="width:100%;">
+                                <h4 style="color: #746fde">Dell Innovation lab</h4>
+                                <p>A hackthon my team came First Place</p>
+                            </div>
+                        </div>
+                        <div class="column hobbies">
+                            <div class="content">
+                                <img src="images/hobby3.jpg" alt="Hobby1" style="width:100%; ">
+                                <h4 style="color: #746fde">Food and Movies</h4>
+                                <p>I really enjoy spending time in a chilly space, watching shows, and eating spicy food.</p>
+                            </div>
+                        </div>
+                        <div class="column hobbies">
+                            <div class="content">
+                                <img src="images/hobby4.jpg" alt="Hobby2" style="width:100%; ">
+                                <h4 style="color: #746fde">Drawing and Painting</h4>
+                                <p>Recently realized I love doodling, painting, and drawing stuff. I find it relaxing.</p>
+                            </div>
+                        </div>
+                        <div class="column hobbies" id="anime">
+                            <div class="content">
+                                <img src="images/hobby1.jpeg" alt="Hobby3" style="width:100%; ">
+                                <h4 style="color: #746fde">Fashion Design</h4>
+                                <p>Spent 3 months learning sewing at a Fashion School in Lagos. I make clothes for myself and others in my spare time.</p>
+                            </div>
+                        </div>
+                        <!-- END GRID -->
+                    </div>
+                    <!-- Portfolio end -->
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <!-- Embeded Map Section-->
+ 
+                    <a name="funFact"></a>
+ 
+                    <div class="tag">
+                        <hr width="100%;" color="#247bc7" size="5">
+                        <h2 class="flag" style="background-color:#3091e6">Fun fact</h2>
+                    </div>
+                    <br>
+                    <br>
                     
-					<h3>My favorite fast-food is <span style="color: red">Chick-fil-A</span>. So, I decided to map all of it's Tennesse locations </h3>
+                    <h3>My favorite fast-food is <span style="color: red">Chick-fil-A</span>. So, I decided to map all of it's Tennesse locations </h3>
                     <p> Try finding my college campus (hint: it's pinned with the letter <span style="color: blue" > 'P' </span>) </p>
                         <div id="map"></div>
                         <p> My favorite combo is the <a href="https://www.chick-fil-a.com/" style="color: brown; text-decoration:none;" > Spicy chicken sandwich + Choclate Milkshake  </a> </p>
-					<br>
-					<br>
-					<br>
-					<br>
-					<!-- Contact Me section -->
-					<a name="comments"></a>
-					<div class="tag">
-						<hr width="100%;" color="#24c770" size="5">
-						<h2 class="flag" style="background-color:#1cd68f">COMMENTS</h2>
-					</div>
-					<br>
-					<br>
-
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <!-- Contact Me section -->
+                    <a name="comments"></a>
+                    <div class="tag">
+                        <hr width="100%;" color="#24c770" size="5">
+                        <h2 class="flag" style="background-color:#1cd68f">COMMENTS</h2>
+                    </div>
+                    <br>
+                    <br>
+ 
                 <!-- Comment Form, Displayed when user is logged in -->
                 <div id="commentForm" style="display:none;">
-				<form  name="commentForm" action="/data" method="POST" onsubmit="return validateForm()">
-						<div class="contact-form">
-							<h2 style=" color:#30343f; "> Drop a Comment!<h2/>
+                <form  name="commentForm" action="/data" method="POST" onsubmit="return validateForm()">
+                        <div class="contact-form">
+                            <h2 style=" color:#30343f; "> Drop a Comment!<h2/>
             <div class="textb"> 
                 <label>  Name :  </label>
                 <input type="text" name="name" value="" placeholder="Enter your Name">
             </div>
-
+ 
             <div class="textb"> 
                 <label>  Message :  </label>
                 <textarea type="text" name="comment">  </textarea>
@@ -234,16 +234,44 @@
         
         <div id="aboutCommentsContainer"> </div>
         <!-- <h2 style="color: #24c770"> Login to add Comments </h2> -->
-							<label for="quantity">Filter number of comments(between 1 and 10):</label>
-							<input onchange="loadComments()" type="number" id="numComments" name="numComments" value="5" min="1" max="10">
-
-							<br>
-							<br>
-							<ul id="commentsContainer"></ul>
-							<br>
-							<br>
-							<!-- main content end -->
-						</div>
-	</body>
-
+                            <label for="quantity">Filter number of comments(between 1 and 10):</label>
+                            <input onchange="loadComments()" type="number" id="numComments" name="numComments" value="5" min="1" max="10">
+ 
+                            <br>
+                            <br>
+                            <ul id="commentsContainer"></ul>
+                            <br>
+                            <br>
+                            <!-- main content end -->
+                        </div>
+    </body>
+ 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -14,7 +14,8 @@
 
 package com.google.sps.servlets;
 
-
+import java.util.ArrayList;
+import com.google.gson.Gson;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -30,22 +31,46 @@ public class LoginStatusServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
-        if (userService.isUserLoggedIn()) {
-            String userEmail = userService.getCurrentUser().getEmail();
-            String urlToRedirectToAfterUserLogsOut = "/";
-            String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-            response.getWriter().println("<p>Hello " + userEmail + "!</p>");
-            response.getWriter().println("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
-        } else {
-            String urlToRedirectToAfterUserLogsIn = "/index.html";
-            String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+        String urlToRedirectToAfterUserLogsOut = "/";
+        String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-            response.getWriter().println("<p>Hello stranger.</p>");
-            response.getWriter().println("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
+        String urlToRedirectToAfterUserLogsIn = "/index.html";
+        String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
+
+        Boolean isUserLoggedIn = userService.isUserLoggedIn();
+
+        LoginData newLoginData = new LoginData(loginUrl, logoutUrl, isUserLoggedIn);
+        String json = convertToJson(newLoginData);
+
+        response.setContentType("application/json");
+        response.getWriter().println(json);
+
+    }
+
+    public static class LoginData {
+        String loginUrl;
+        String logoutUrl;
+        Boolean isUserLoggedIn;
+
+        LoginData(String loginUrl, String logoutUrl, Boolean isUserLoggedIn) {
+            this.loginUrl = loginUrl;
+            this.logoutUrl = logoutUrl;
+            this.isUserLoggedIn = isUserLoggedIn;
         }
+    }
 
-        response.getWriter().println(userService.isUserLoggedIn());
-
+    private String convertToJson(LoginData loginData) {
+        String json = "{";
+        json += "\"loginUrl\": ";
+        json += "\"" + loginData.loginUrl + "\"";
+        json += ", ";
+        json += "\"logoutUrl\": ";
+        json += "\"" + loginData.logoutUrl + "\"";
+        json += ", ";
+        json += "\"isUserLoggedIn\": ";
+        json += loginData.isUserLoggedIn;
+        json += "}";
+        return json;
     }
 }
