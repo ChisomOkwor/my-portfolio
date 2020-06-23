@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/login")
-public class loginStatusServlet extends HttpServlet {
+public class LoginStatusServlet extends HttpServlet {
 
     private final UserService userService = UserServiceFactory.getUserService();
     @Override

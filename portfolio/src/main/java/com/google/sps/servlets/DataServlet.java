@@ -51,10 +51,9 @@ public class DataServlet extends HttpServlet {
             long id = entity.getKey().getId();
             String name = (String) entity.getProperty("name");
             String comment = (String) entity.getProperty("comment");
-            String email = (String) entity.getProperty("email");
-
             Date date = (Date) entity.getProperty("date");
-            UserData newData = new UserData(id, name, comment, date, email);
+
+            UserData newData = new UserData(id, name, comment, date);
             data.add(newData);
         }
         
@@ -62,7 +61,6 @@ public class DataServlet extends HttpServlet {
 
         Gson gson = new Gson();
         final int numCommentsUserSelects = getIntParameter(request, "numValue", 5);
-
 
         final int numCommentsDisplayed = Math.min(numCommentsUserSelects, data.size());
         response.getWriter().println(gson.toJson(data.subList(0, numCommentsDisplayed)));
@@ -74,41 +72,47 @@ public class DataServlet extends HttpServlet {
         String name;
         String comment;
         Date date;
-        String email;
-
-        UserData(long id, String name, String comment, Date date, String email) {
+    
+        UserData(long id, String name, String comment, Date date) {
             this.id = id;
             this.name = name;
             this.comment = comment;
             this.date = date;
-            this.email = email;
         }
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Date date = new Date();
-        String name = getParameter(request, "name", "");
-        String comment = getParameter(request, "comment", "");
-        String userEmail = userService.getCurrentUser().getEmail();
+        // User must be logged in before posting comments.
 
-        if (name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Name not entered.");
+        if (userService.isUserLoggedIn()) {
+            Date date = new Date();
+            String name = getParameter(request, "name", "");
+            String comment = getParameter(request, "comment", "");
+            String userEmail = userService.getCurrentUser().getEmail();
+
+            if (name.trim().isEmpty()) {
+                throw new IllegalArgumentException("Name not entered.");
+            }
+
+            if (comment.trim().isEmpty()) {
+                throw new IllegalArgumentException("Comment field empty.");
+            }
+
+            Entity taskEntity = new Entity("UserData");
+            taskEntity.setProperty("name", name);
+            taskEntity.setProperty("email", userEmail);
+            taskEntity.setProperty("comment", comment);
+            taskEntity.setProperty("date", date);
+            datastore.put(taskEntity);
+
+            // Redirect back to the HTML page.
+            response.sendRedirect("/index.html");
         }
 
-        if (comment.trim().isEmpty()) {
-            throw new IllegalArgumentException("Comment field empty.");
+        else{
+            throw new IllegalArgumentException("Login to post comments.");
         }
-
-        Entity taskEntity = new Entity("UserData");
-        taskEntity.setProperty("name", name);
-        taskEntity.setProperty("email", userEmail);
-        taskEntity.setProperty("comment", comment);
-        taskEntity.setProperty("date", date);
-        datastore.put(taskEntity);
-
-        // Redirect back to the HTML page.
-        response.sendRedirect("/index.html");
     }
 
     private int getIntParameter(HttpServletRequest request, String name, int defaultValue) {
