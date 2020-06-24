@@ -181,25 +181,20 @@ function createMap() {
 }
 
 function fetchLogin() {
-    fetch('/login').then(response => response.json()).then((LoginData) => {
-        var isUserLoggedIn = LoginData.isUserLoggedIn;
-        const loginUrl = LoginData.loginUrl;
-        const logoutUrl = LoginData.logoutUrl;
-
-        var Url = LoginData.loginUrl;
-
-        if (isUserLoggedIn == true) {
-            Url = LoginData.logoutUrl;
+    fetch('/login').then(response => response.json()).then((loginData) => {
+        var url = loginData.loginUrl;
+        if (loginData.isUserLoggedIn == true) {
+            url = loginData.logoutUrl;
         }
 
-        window.location.assign(Url);
+        window.location.assign(url);
 
     });
 }
 
 function showCommentForm() {
-    fetch('/login').then(response => response.json()).then((LoginData) => {
-        var isUserLoggedIn = LoginData.isUserLoggedIn;
+    fetch('/login').then(response => response.json()).then((loginData) => {
+        var isUserLoggedIn = loginData.isUserLoggedIn;
 
         document.getElementById("commentForm").style.display = "none";
         document.getElementById("aboutCommentsContainer").innerHTML =

@@ -40,18 +40,18 @@ public class LoginStatusServlet extends HttpServlet {
 
         Boolean isUserLoggedIn = userService.isUserLoggedIn();
 
-        LoginData newLoginData = new LoginData(loginUrl, logoutUrl, isUserLoggedIn);
-        String json = convertToJson(newLoginData);
-
+        LoginData userLoginData = new LoginData(loginUrl, logoutUrl, isUserLoggedIn);
         response.setContentType("application/json");
-        response.getWriter().println(json);
+        
+        Gson gson = new Gson();
+        response.getWriter().println(gson.toJson(userLoginData));
 
     }
 
     public static class LoginData {
         String loginUrl;
         String logoutUrl;
-        Boolean isUserLoggedIn;
+        boolean isUserLoggedIn;
 
         LoginData(String loginUrl, String logoutUrl, Boolean isUserLoggedIn) {
             this.loginUrl = loginUrl;
@@ -60,17 +60,4 @@ public class LoginStatusServlet extends HttpServlet {
         }
     }
 
-    private String convertToJson(LoginData loginData) {
-        String json = "{";
-        json += "\"loginUrl\": ";
-        json += "\"" + loginData.loginUrl + "\"";
-        json += ", ";
-        json += "\"logoutUrl\": ";
-        json += "\"" + loginData.logoutUrl + "\"";
-        json += ", ";
-        json += "\"isUserLoggedIn\": ";
-        json += loginData.isUserLoggedIn;
-        json += "}";
-        return json;
-    }
 }

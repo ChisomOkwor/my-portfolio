@@ -108,9 +108,7 @@ public class DataServlet extends HttpServlet {
 
             // Redirect back to the HTML page.
             response.sendRedirect("/index.html");
-        }
-
-        else{
+        }   else { 
             throw new IllegalArgumentException("Login to post comments.");
         }
     }
