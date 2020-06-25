@@ -30,19 +30,18 @@ public class LoginStatusServlet extends HttpServlet {
     private final UserService userService = UserServiceFactory.getUserService();
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
 
         String urlToRedirectToAfterUserLogsOut = "/";
         String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
 
-        String urlToRedirectToAfterUserLogsIn = "/index.html";
+        String urlToRedirectToAfterUserLogsIn = "/";
         String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
 
-        Boolean isUserLoggedIn = userService.isUserLoggedIn();
+        boolean isUserLoggedIn = userService.isUserLoggedIn();
 
         LoginData userLoginData = new LoginData(loginUrl, logoutUrl, isUserLoggedIn);
         response.setContentType("application/json");
-        
+
         Gson gson = new Gson();
         response.getWriter().println(gson.toJson(userLoginData));
 
@@ -53,7 +52,7 @@ public class LoginStatusServlet extends HttpServlet {
         String logoutUrl;
         boolean isUserLoggedIn;
 
-        LoginData(String loginUrl, String logoutUrl, Boolean isUserLoggedIn) {
+        LoginData(String loginUrl, String logoutUrl, boolean isUserLoggedIn) {
             this.loginUrl = loginUrl;
             this.logoutUrl = logoutUrl;
             this.isUserLoggedIn = isUserLoggedIn;

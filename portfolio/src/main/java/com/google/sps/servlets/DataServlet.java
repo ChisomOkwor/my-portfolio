@@ -56,7 +56,7 @@ public class DataServlet extends HttpServlet {
             UserData newData = new UserData(id, name, comment, date);
             data.add(newData);
         }
-        
+
         response.setContentType("application/json;");
 
         Gson gson = new Gson();
@@ -72,7 +72,7 @@ public class DataServlet extends HttpServlet {
         String name;
         String comment;
         Date date;
-    
+
         UserData(long id, String name, String comment, Date date) {
             this.id = id;
             this.name = name;
@@ -108,7 +108,7 @@ public class DataServlet extends HttpServlet {
 
             // Redirect back to the HTML page.
             response.sendRedirect("/index.html");
-        }   else { 
+        } else {
             throw new IllegalArgumentException("Login to post comments.");
         }
     }
@@ -118,7 +118,7 @@ public class DataServlet extends HttpServlet {
         if (value == null) {
             return (defaultValue);
         }
-        
+
         return Integer.parseInt(value);
     }
 
