@@ -14,6 +14,9 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 import java.io.*;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -34,6 +37,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
     private final DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    private final UserService userService = UserServiceFactory.getUserService();
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -46,10 +50,10 @@ public class DataServlet extends HttpServlet {
         for (Entity entity: results.asIterable()) {
             long id = entity.getKey().getId();
             String name = (String) entity.getProperty("name");
-            String email = (String) entity.getProperty("email");
             String comment = (String) entity.getProperty("comment");
             Date date = (Date) entity.getProperty("date");
-            UserData newData = new UserData(id, name, email, comment, date);
+
+            UserData newData = new UserData(id, name, comment, date);
             data.add(newData);
         }
 
@@ -66,14 +70,12 @@ public class DataServlet extends HttpServlet {
     public static class UserData {
         long id;
         String name;
-        String email;
         String comment;
         Date date;
 
-        UserData(long id, String name, String email, String comment, Date date) {
+        UserData(long id, String name, String comment, Date date) {
             this.id = id;
             this.name = name;
-            this.email = email;
             this.comment = comment;
             this.date = date;
         }
@@ -81,28 +83,34 @@ public class DataServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Date date = new Date();
-        String name = getParameter(request, "name", "");
-        String email = getParameter(request, "email", "");
-        String comment = getParameter(request, "comment", "");
+        // User must be logged in before posting comments.
 
-        if (name.trim().isEmpty()) {
-            throw new IllegalArgumentException("Name not entered.");
+        if (userService.isUserLoggedIn()) {
+            Date date = new Date();
+            String name = getParameter(request, "name", "");
+            String comment = getParameter(request, "comment", "");
+            String userEmail = userService.getCurrentUser().getEmail();
+
+            if (name.trim().isEmpty()) {
+                throw new IllegalArgumentException("Name not entered.");
+            }
+
+            if (comment.trim().isEmpty()) {
+                throw new IllegalArgumentException("Comment field empty.");
+            }
+
+            Entity taskEntity = new Entity("UserData");
+            taskEntity.setProperty("name", name);
+            taskEntity.setProperty("email", userEmail);
+            taskEntity.setProperty("comment", comment);
+            taskEntity.setProperty("date", date);
+            datastore.put(taskEntity);
+
+            // Redirect back to the HTML page.
+            response.sendRedirect("/index.html");
+        } else {
+            throw new IllegalArgumentException("Login to post comments.");
         }
-
-        if (comment.trim().isEmpty()) {
-            throw new IllegalArgumentException("Comment field empty.");
-        }
-
-        Entity taskEntity = new Entity("UserData");
-        taskEntity.setProperty("name", name);
-        taskEntity.setProperty("email", email);
-        taskEntity.setProperty("comment", comment);
-        taskEntity.setProperty("date", date);
-        datastore.put(taskEntity);
-
-        // Redirect back to the HTML page.
-        response.sendRedirect("/index.html");
     }
 
     private int getIntParameter(HttpServletRequest request, String name, int defaultValue) {
