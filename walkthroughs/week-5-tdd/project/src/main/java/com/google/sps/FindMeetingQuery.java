@@ -48,14 +48,15 @@ public final class FindMeetingQuery {
 
         // Sorts array of event objects by start time in ascending order
         ArrayList < Event > eventsList = new ArrayList < Event > (events);
-        Collections.sort(eventsList, Event.ORDER_BY_START_TIME);
-
-        Iterator < Event > eventsListIterator = eventsList.iterator();
 
         // if no events return the whole day
-        if (eventsListIterator.hasNext() == false) {
+        if (eventsList.isEmpty() == true) {
             return Arrays.asList(TimeRange.WHOLE_DAY);
         }
+
+        Collections.sort(eventsList, Event.ORDER_BY_START_TIME);
+        Iterator < Event > eventsListIterator = eventsList.iterator();
+
 
         // Conflicting event is found
         Event conflict = eventsListIterator.next();
