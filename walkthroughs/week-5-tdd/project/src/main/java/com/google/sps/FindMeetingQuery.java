@@ -41,22 +41,20 @@ public final class FindMeetingQuery {
         if (attendees.isEmpty() && optionalAttendees.isEmpty()) {
             return Arrays.asList(TimeRange.WHOLE_DAY);
 
-            // if there are optional attendees but no attendees, optional attendees will be treated as attendees
+        // if there are optional attendees but no attendees, optional attendees will be treated as attendees
         } else if (attendees.isEmpty()) {
             attendees = optionalAttendees;
         }
 
-        // Sorts array of event objects by start time in ascending order
-        ArrayList < Event > eventsList = new ArrayList < Event > (events);
-
         // if no events return the whole day
+        ArrayList < Event > eventsList = new ArrayList < Event > (events);
         if (eventsList.isEmpty() == true) {
             return Arrays.asList(TimeRange.WHOLE_DAY);
         }
 
+        // Sorts array of event objects by start time in ascending order
         Collections.sort(eventsList, Event.ORDER_BY_START_TIME);
         Iterator < Event > eventsListIterator = eventsList.iterator();
-
 
         // Conflicting event is found
         Event conflict = eventsListIterator.next();
