@@ -65,6 +65,7 @@ public final class FindMeetingQuery {
             start = TimeRange.START_OF_DAY;
         } else {
 
+            // add duration between start of day and first conflict
             int possibleDurationStart = TimeRange.START_OF_DAY;
             int possibleDurationEnd = conflict.getWhen().start();
             if (slotDurationIsPossible(request, possibleDurationStart, possibleDurationEnd)) {
@@ -90,19 +91,13 @@ public final class FindMeetingQuery {
                     TimeRange slot = TimeRange.fromStartEnd(start, conflict.getWhen().start(), false);
                     options.add(slot);
                 }
-
+                
                 // set the start for the next option
                 start = conflict.getWhen().end();
             }
         }
 
-        // check if last conflict is relevant. If yes, add option between last conflict and end of day
-        if (conflictIsRelevant(conflict, attendees) == false) {
-            options.add(TimeRange.fromStartEnd(start, TimeRange.END_OF_DAY, true));
-            return options;
-        }
-
-        // check if last conflict is at end of day. If no, can add option btwn last conflict and end of day.
+        // Adds duration between last conflict and end of the day
         if ((conflict.getWhen().contains(TimeRange.END_OF_DAY)) == false) {
             if (slotDurationIsPossible(request, start, TimeRange.END_OF_DAY)) {
                 options.add(TimeRange.fromStartEnd(start, TimeRange.END_OF_DAY, true));
