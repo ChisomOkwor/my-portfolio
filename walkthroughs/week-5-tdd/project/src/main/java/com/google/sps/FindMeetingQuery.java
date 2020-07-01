@@ -17,7 +17,6 @@ package com.google.sps;
 import java.util.Comparator;
 import java.util.Collection;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Arrays;
@@ -113,7 +112,6 @@ public final class FindMeetingQuery {
         return options;
     }
 
-
     private boolean slotDurationIsPossible(MeetingRequest request, int startSlot, int endSlot) {
         return (request.getDuration() <= (endSlot - startSlot));
     }
@@ -123,12 +121,12 @@ public final class FindMeetingQuery {
         //  Returns true if the conflict involves meetingAttendees 
         // i.e if the conflicting event have attendees common to meetingAttendees
 
-        Set < String > conflictAttendees = conflict.getAttendees();
+        Collection < String > conflictAttendees = conflict.getAttendees();
         return !(Collections.disjoint(conflictAttendees, meetingAttendees));
     }
 
     private boolean conflictIsRelevantForOptionalMembers(Event conflict, MeetingRequest request) {
-        Set < String > conflictAttendees = conflict.getAttendees();
+        Collection < String > conflictAttendees = conflict.getAttendees();
         Collection < String > optionalAttendees = request.getOptionalAttendees();
 
         // return false if optional attendee has whole day event
