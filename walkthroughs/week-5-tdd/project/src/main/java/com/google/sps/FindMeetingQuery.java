@@ -21,7 +21,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.Arrays;
 
-
 public final class FindMeetingQuery {
 
     private final ArrayList < TimeRange > options = new ArrayList < TimeRange > ();
@@ -41,76 +40,62 @@ public final class FindMeetingQuery {
         if (attendees.isEmpty() && optionalAttendees.isEmpty()) {
             return Arrays.asList(TimeRange.WHOLE_DAY);
 
-        // if there are optional attendees but no attendees, optional attendees will be treated as attendees
+            // if there are optional attendees but no attendees, optional attendees will be treated as attendees
         } else if (attendees.isEmpty()) {
             attendees = optionalAttendees;
         }
 
         // if no events return the whole day
-        ArrayList < Event > eventsList = new ArrayList < Event > (events);
-        if (eventsList.isEmpty() == true) {
+        if (events.isEmpty()) {
             return Arrays.asList(TimeRange.WHOLE_DAY);
         }
 
         // Sorts array of event objects by start time in ascending order
+        ArrayList < Event > eventsList = new ArrayList < Event > (events);
         Collections.sort(eventsList, Event.ORDER_BY_START_TIME);
         Iterator < Event > eventsListIterator = eventsList.iterator();
 
-        // Conflicting event is found
-        Event conflict = eventsListIterator.next();
-        int start;
-
-        // Ignore conflict if it doesn't involve any person in the request 
-        if (conflictIsRelevant(conflict, attendees) == false) {
-            start = TimeRange.START_OF_DAY;
-        } else {
-
-            // add duration between start of day and first conflict
-            int possibleDurationStart = TimeRange.START_OF_DAY;
-            int possibleDurationEnd = conflict.getWhen().start();
-            if (slotDurationIsPossible(request, possibleDurationStart, possibleDurationEnd)) {
-                options.add(TimeRange.fromStartEnd(possibleDurationStart, possibleDurationEnd, false));
-            }
-
-            // start begins at the end of first conflict
-            start = conflict.getWhen().end();
-        }
+        // initializing variables used in eventsList iterator loop
+        int start = TimeRange.START_OF_DAY;
+        Event conflict = null;
+        Event prevConflict = null;
 
         while (eventsListIterator.hasNext()) {
-            Event prevConflict = conflict;
-            conflict = eventsListIterator.next();
-
             // if previous conflict end is after current conflict end, replace current conflict with previous conflict
-            if (prevConflict.getWhen().end() > conflict.getWhen().end()) {
-                conflict = prevConflict;
+            conflict = eventsListIterator.next();
+            if (prevConflict != null) {
+                if (prevConflict.getWhen().end() > conflict.getWhen().end()) {
+                    conflict = prevConflict;
+                }
             }
 
-            if (conflictIsRelevant(conflict, attendees) || (!options.isEmpty() && conflictIsRelevantForOptionalMembers(conflict, request))) {
-
-                if (slotDurationIsPossible(request, start, conflict.getWhen().start())) {
+            if (isConflictRelevant(conflict, attendees) || (!options.isEmpty() && isConflictRelevantForOptionalMembers(conflict, request))) {
+                if (isDurationPossible(request, start, conflict.getWhen().start())) {
                     TimeRange slot = TimeRange.fromStartEnd(start, conflict.getWhen().start(), false);
                     options.add(slot);
                 }
-                
                 // set the start for the next option
                 start = conflict.getWhen().end();
             }
-        }
 
-        // Adds duration between last conflict and end of the day
-        if ((conflict.getWhen().contains(TimeRange.END_OF_DAY)) == false) {
-            if (slotDurationIsPossible(request, start, TimeRange.END_OF_DAY)) {
-                options.add(TimeRange.fromStartEnd(start, TimeRange.END_OF_DAY, true));
+            prevConflict = conflict;
+
+            // Adds duration between last conflict and end of the day
+            if (!eventsListIterator.hasNext()) {
+                if (isDurationPossible(request, start, TimeRange.END_OF_DAY)) {
+                    options.add(TimeRange.fromStartEnd(start, TimeRange.END_OF_DAY, true));
+                }
             }
         }
+
         return options;
     }
 
-    private boolean slotDurationIsPossible(MeetingRequest request, int startSlot, int endSlot) {
+    private boolean isDurationPossible(MeetingRequest request, int startSlot, int endSlot) {
         return (request.getDuration() <= (endSlot - startSlot));
     }
 
-    private boolean conflictIsRelevant(Event conflict, Collection meetingAttendees) {
+    private boolean isConflictRelevant(Event conflict, Collection meetingAttendees) {
 
         //  Returns true if the conflict involves meetingAttendees 
         // i.e if the conflicting event have attendees common to meetingAttendees
@@ -119,7 +104,7 @@ public final class FindMeetingQuery {
         return !(Collections.disjoint(conflictAttendees, meetingAttendees));
     }
 
-    private boolean conflictIsRelevantForOptionalMembers(Event conflict, MeetingRequest request) {
+    private boolean isConflictRelevantForOptionalMembers(Event conflict, MeetingRequest request) {
         Collection < String > conflictAttendees = conflict.getAttendees();
         Collection < String > optionalAttendees = request.getOptionalAttendees();
 
