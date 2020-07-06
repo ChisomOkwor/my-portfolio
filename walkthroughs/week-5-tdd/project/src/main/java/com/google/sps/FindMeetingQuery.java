@@ -57,30 +57,31 @@ public final class FindMeetingQuery {
 
         // Initializing variables used in eventsList iterator loop
         int start = TimeRange.START_OF_DAY;
-        Event conflict = null;
-        Event prevConflict = null;
+        Event event = null;
+        Event prevEvent = null;
 
         while (eventsListIterator.hasNext()) {
-            // If previous conflict end is after current conflict end, replace current conflict with previous conflict
-            conflict = eventsListIterator.next();
-            if (prevConflict != null) {
-                if (prevConflict.getWhen().end() > conflict.getWhen().end()) {
-                    conflict = prevConflict;
+            // If previous event end is after current event end, replace current event with previous event
+
+            event = eventsListIterator.next();
+            if (prevEvent != null) {
+                if (prevEvent.getWhen().end() > event.getWhen().end()) {
+                    event = prevEvent;
                 }
             }
-
-            if (isConflictRelevant(conflict, attendees) || (!options.isEmpty() && isConflictRelevantForOptionalMembers(conflict, request))) {
-                if (isDurationPossible(request, start, conflict.getWhen().start())) {
-                    TimeRange slot = TimeRange.fromStartEnd(start, conflict.getWhen().start(), false);
+            
+            if (isEventRelevant(event, attendees) || (!options.isEmpty() && isEventRelevantForOptionalMembers(event, request))) {
+                if (isDurationPossible(request, start, event.getWhen().start())) {
+                    TimeRange slot = TimeRange.fromStartEnd(start, event.getWhen().start(), false);
                     options.add(slot);
                 }
                 // Set the start for the next option
-                start = conflict.getWhen().end();
+                start = event.getWhen().end();
             }
 
-            prevConflict = conflict;
-
-            // Adds duration between last conflict and end of the day
+            prevEvent = event;
+            
+            // Adds duration between last event and end of the day
             if (!eventsListIterator.hasNext()) {
                 if (isDurationPossible(request, start, TimeRange.END_OF_DAY)) {
                     options.add(TimeRange.fromStartEnd(start, TimeRange.END_OF_DAY, true));
@@ -95,25 +96,25 @@ public final class FindMeetingQuery {
         return (request.getDuration() <= (endSlot - startSlot));
     }
 
-    private boolean isConflictRelevant(Event conflict, Collection meetingAttendees) {
+    private boolean isEventRelevant(Event event, Collection meetingAttendees) {
 
-        //  Returns true if the conflict involves meetingAttendees 
+        //  Returns true if the event involves meetingAttendees 
         // i.e if the conflicting event have attendees common to meetingAttendees
 
-        Collection < String > conflictAttendees = conflict.getAttendees();
-        return !(Collections.disjoint(conflictAttendees, meetingAttendees));
+        Collection < String > eventAttendees = event.getAttendees();
+        return !(Collections.disjoint(eventAttendees, meetingAttendees));
     }
 
-    private boolean isConflictRelevantForOptionalMembers(Event conflict, MeetingRequest request) {
-        Collection < String > conflictAttendees = conflict.getAttendees();
+    private boolean isEventRelevantForOptionalMembers(Event event, MeetingRequest request) {
+        Collection < String > eventAttendees = event.getAttendees();
         Collection < String > optionalAttendees = request.getOptionalAttendees();
 
         // return false if optional attendee has whole day event
-        if (conflict.getWhen().start() == TimeRange.START_OF_DAY && conflict.getWhen().end() == TimeRange.END_OF_DAY) {
+        if (event.getWhen().start() == TimeRange.START_OF_DAY && event.getWhen().end() == TimeRange.END_OF_DAY) {
             return false;
         }
 
-        return !(Collections.disjoint(conflictAttendees, optionalAttendees));
+        return !(Collections.disjoint(eventAttendees, optionalAttendees));
 
     }
 }
