@@ -30,22 +30,22 @@ public final class FindMeetingQuery {
         Collection attendees = request.getAttendees();
         Collection optionalAttendees = request.getOptionalAttendees();
 
-        // check if duration is longer than the day. if so, return empty collection.
+        // Check if duration is longer than the day. if so, return empty collection.
         long duration = request.getDuration();
         if (duration > TimeRange.WHOLE_DAY.duration()) {
             return Arrays.asList();
         }
 
-        // if no attendees or optional attendees return collection of one item being the full day
+        // If no attendees or optional attendees return collection of one item being the full day
         if (attendees.isEmpty() && optionalAttendees.isEmpty()) {
             return Arrays.asList(TimeRange.WHOLE_DAY);
 
-            // if there are optional attendees but no attendees, optional attendees will be treated as attendees
+        // If there are optional attendees but no attendees, optional attendees will be treated as attendees
         } else if (attendees.isEmpty()) {
             attendees = optionalAttendees;
         }
 
-        // if no events return the whole day
+        // If no events return the whole day
         if (events.isEmpty()) {
             return Arrays.asList(TimeRange.WHOLE_DAY);
         }
@@ -55,13 +55,13 @@ public final class FindMeetingQuery {
         Collections.sort(eventsList, Event.ORDER_BY_START_TIME);
         Iterator < Event > eventsListIterator = eventsList.iterator();
 
-        // initializing variables used in eventsList iterator loop
+        // Initializing variables used in eventsList iterator loop
         int start = TimeRange.START_OF_DAY;
         Event conflict = null;
         Event prevConflict = null;
 
         while (eventsListIterator.hasNext()) {
-            // if previous conflict end is after current conflict end, replace current conflict with previous conflict
+            // If previous conflict end is after current conflict end, replace current conflict with previous conflict
             conflict = eventsListIterator.next();
             if (prevConflict != null) {
                 if (prevConflict.getWhen().end() > conflict.getWhen().end()) {
@@ -74,7 +74,7 @@ public final class FindMeetingQuery {
                     TimeRange slot = TimeRange.fromStartEnd(start, conflict.getWhen().start(), false);
                     options.add(slot);
                 }
-                // set the start for the next option
+                // Set the start for the next option
                 start = conflict.getWhen().end();
             }
 
